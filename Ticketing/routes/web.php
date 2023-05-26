@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ConcertController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 /*
@@ -15,31 +15,28 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
-});
+//start route home
+Route::get('/{path}', [HomeController::class, 'index'])->where('path', '^$|home');
+//end route home
 
-//route home
-Route::get('/home', function () {
-    return (view('homepage'));
-});
+//start route  login
+Route::get('/login', [LoginController::class, 'index']);
 
+Route::post('/postLogin',[LoginController::class, 'store']);
+//end route login
 
-//route  login
-Route::get('/login', function () {
-    return (view('login'));
-});
-
-
-//route concerts (all)
+//start route concerts (all)
 Route::get('/concerts', function () {
     return (view('concerts'));
 });
+//end route concerts (all)
 
-Route::get('/about', function () {
-    return (view('about'));
-});
+//start route about
+Route::get('/about', [AboutController::class, 'index']);
+//end route about
+
 //route concert (singular)
 Route::get('/concerts/{post:slug}', function () {
     return (view('concert'));
 });
+//end route concert (singular)

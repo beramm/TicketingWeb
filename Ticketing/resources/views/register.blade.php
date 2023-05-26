@@ -9,21 +9,22 @@
                         Login
                     </div>
                     <div class="card-body" id="formBody">
-                        <form id="loginForm" method="post" action="/postLogin">
-                        @csrf
+                        <form id="registrationForm">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" placeholder="Enter username">
+                            </div>
                             <div class="form-group">
                                 <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                <input type="email" class="form-control" id="email" placeholder="Enter email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                <input type="password" class="form-control" id="password" placeholder="Password">
                             </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                            <button type="button" class="btn btn-link" onclick="toggleForm()">Switch to
-                                Registration</button>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="button" class="btn btn-link" onclick="toggleForm()">Switch to Login</button>
                         </form>
-                        
                     </div>
                 </div>
             </div>
