@@ -1,10 +1,11 @@
-<nav class="navbar navbar-expand-lg bg-dark" >
+<nav class="navbar navbar-expand-lg bg-dark">
 
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg"
         aria-controls="navbarOffcanvasLg" style="margin-left: 15px;">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand me-auto text-white" href="/home" style="text-align: left; margin-left: 15px; margin-right: 50px;">
+    <a class="navbar-brand me-auto text-white" href="/home"
+        style="text-align: left; margin-left: 15px; margin-right: 50px;">
         <img src="/img/logo1.png" style="width: 95px; margin-right: 20px" id="pictAll">
         <span class="diss">TicketVerse</span>
     </a>
@@ -44,15 +45,16 @@
                     </ul>
                 </li>
                 <li class="nav-item text-white " style="margin-right: 20px;">
-                    <a class="nav-link" href="about" id="contact-link"
-                        title="Click to see Contact Person">About Us</a>
+                    <a class="nav-link" href="about" id="contact-link" title="Click to see Contact Person">About
+                        Us</a>
                 </li>
                 <li class="nav-item text-white" style="margin-right: 15px;">
-                    <!--if logged in route to /profile
-                    not logged in route to /login
-                    -->
-                    <a class="nav-link" href="/login"
-                        title="Login">Profile</a>
+                    @guest
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                @else
+                    <li class="m-3"><a href="{{ route('profile') }}">Profile</a></li>
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                @endguest
                 </li>
             </ul>
 

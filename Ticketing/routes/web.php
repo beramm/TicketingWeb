@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,14 +17,28 @@ use App\Http\Controllers\LoginController;
 */
 
 //start route home
-Route::get('/{path}', [HomeController::class, 'index'])->where('path', '^$|home');
+Route::get('/{path?}', [HomeController::class, 'index'])->where('path', '^$|home')->name('homepage');
 //end route home
 
-//start route  login
-Route::get('/login', [LoginController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
+    Route::view('/profile', 'profile')->name('profile');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 
-Route::post('/postLogin',[LoginController::class, 'store']);
-//end route login
+Route::middleware(['guest'])->group(function () {
+    Route::view('/login', 'login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+});
+
+//start route  login scenario include register
+
+
+
+
+Route::get('/register', [RegisterController::class, 'index']);
+
+Route::post('/postRegister', [RegisterController::class, 'store']);
+//end route login scenario include register
 
 //start route concerts (all)
 Route::get('/concerts', function () {
