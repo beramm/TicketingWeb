@@ -28,18 +28,9 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['guest'])->group(function () {
     Route::view('/login', 'login');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/postRegister', [RegisterController::class, 'store']);
 });
-
-//start route  login scenario include register
-
-
-
-
-Route::get('/register', [RegisterController::class, 'index']);
-
-Route::post('/postRegister', [RegisterController::class, 'store']);
-//end route login scenario include register
-
 //start route concerts (all)
 Route::get('/concerts', function () {
     return (view('concerts'));
