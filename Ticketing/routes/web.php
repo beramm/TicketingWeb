@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['guest'])->group(function () {
-    Route::view('/login', 'login');
+    Route::view('/login', 'sign.loginup');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::get('/register', [RegisterController::class, 'index']);
     Route::post('/postRegister', [RegisterController::class, 'store']);

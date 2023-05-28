@@ -1,6 +1,4 @@
-@extends('layouts.main')
-
-@section('container')
+<?php $__env->startSection('container'); ?>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -10,7 +8,7 @@
                     </div>
                     <div class="card-body" id="formBody">
                         <form id="registrationForm" method="post" action="/postRegister">
-                            @csrf
+                            <?php echo csrf_field(); ?>
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="name" placeholder="Enter username" name="name">
@@ -31,4 +29,6 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\app\TicketingWeb\Ticketing\resources\views/register.blade.php ENDPATH**/ ?>

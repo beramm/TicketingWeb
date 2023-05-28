@@ -1,6 +1,4 @@
-
-
 <?php $__env->startSection('container'); ?>
-<h1>AbouPage</h1>
+<h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce suscipit odio non metus viverra, id pharetra mauris semper. Maecenas id risus sagittis, aliquet dui sed, ultricies arcu. Nullam sed libero non nisl placerat gravida. Nunc vitae ante euismod, lacinia elit ut, semper nunc. In ac gravida lorem. Sed dapibus tellus at mauris consectetur, eu consequat risus volutpat. Nulla facilisi. Curabitur et erat vitae turpis euismod posuere. Maecenas eleifend est ut est fringilla, vitae dignissim mi efficitur. Duis sagittis justo id quam tristique fermentum. Donec tristique metus in enim cursus, at auctor nulla semper. Cras dapibus elit eget enim fringilla consectetur. Suspendisse potenti. Nunc vel feugiat mauris, at volutpat ligula. Suspendisse potenti. Vivamus eu fringilla felis. Nam sit amet varius eros, eu aliquam enim.</h1>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\app\TicketingWeb\Ticketing\resources\views/about.blade.php ENDPATH**/ ?>
