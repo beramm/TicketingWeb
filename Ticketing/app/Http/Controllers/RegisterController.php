@@ -9,7 +9,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('register');
+        return view('sign.loginup');
     }
 
     public function store(Request $request)
@@ -28,7 +28,6 @@ class RegisterController extends Controller
         //     return back();
         // }
         User::create($validatedData);
-        // return back();
         session()->flash('success', 'Successfully added, please log in');
         return redirect()->route('login');
     }

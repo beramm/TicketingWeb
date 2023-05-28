@@ -204,7 +204,7 @@
             }
         }
     </style>
-    
+
     <div class="container right-panel-active" id="container">
         <!-- Sign Up -->
         <div class="container__form container--signup">
@@ -259,12 +259,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <form action="{{ route('login') }}" class="form" id="form2" method="POST">
+            @if (session()->has('invalid'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('invalid') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            <form action="/login" class="form" id="form2" method="POST">
                 @csrf
+
                 <h2 class="form__title">Sign In</h2>
-                <input type="email" placeholder="email" class="input" />
-                <input type="password" placeholder="password" class="input" />
-                <a href="#" class="link">Forgot your password?</a>
+                <input type="email" id="email" name="email" placeholder="email" class="input" />
+                <input type="password" id="email" name="password" placeholder="password" class="input" />
+                {{-- <a href="#" class="link">Forgot your password?</a> --}}
                 <button class="btn" type="submit">Sign In</button>
             </form>
 

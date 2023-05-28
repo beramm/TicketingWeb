@@ -42,18 +42,40 @@
                         <li><a class="dropdown-item" href="#">Hip-Hop</a></li>
                     </ul>
                 </li>
-                <li class="nav-item text-white " style="margin-right: 20px;">
+                <li class="nav-item text-white " style="margin-right: 10px;">
                     <a class="nav-link" href="about" id="contact-link" title="Click to see Contact Person">About
                         Us</a>
                 </li>
-                <li class="nav-item text-white" style="margin-right: 15px;">
+                <ul class="navbar-nav">
                     <?php if(auth()->guard()->guest()): ?>
-                    <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
-                <?php else: ?>
-                    <li class="m-3"><a href="<?php echo e(route('profile')); ?>">Profile</a></li>
-                    <li><a href="<?php echo e(route('logout')); ?>">Logout</a></li>
-                <?php endif; ?>
-                </li>
+                        <li class="nav-item text-white " style="margin-right: 20px;">
+                            <a class="nav-link" href="<?php echo e(route('login')); ?>" id="contact-link"
+                                title="Click to see Contact Person">Login <i class="fa fa-sign-in"></i></a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item dropdown" style="margin-right: 10px;">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="kegiatan-link" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Personal
+                            </a>
+                            <ul class="dropdown-menu dropdown-hover" data-bs-auto-close="false">
+                                <li class="text-dark"><a class="dropdown-item" href="<?php echo e(route('login')); ?>">Profile <i
+                                            class="bi bi-person-circle"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="text-dark"><a class="dropdown-item" href="<?php echo e(route('logout')); ?>">Logout <i
+                                            class="fa fa-sign-out"></i></a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+
+                </ul>
+                
             </ul>
 
         </div>

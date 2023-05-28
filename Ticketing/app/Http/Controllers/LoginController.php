@@ -22,9 +22,12 @@ class LoginController extends Controller
             return redirect()->route('homepage');
         }
 
-        return back()->withErrors([
-            'email' => 'Invalid credentials',
-        ]);
+        // return back()->withErrors([
+            
+        //     'email' => 'Invalid credentials',
+
+        // ]);
+        return back()->with('invalid', 'Invalid Credentials');
     }
 
     public function logout()
