@@ -143,7 +143,7 @@
             transform: translateX(20%);
         }
 
-        .btn {
+        #button,#signIn,#signUp {
             background-color: var(--blue);
             background-image: linear-gradient(90deg, var(--blue) 0%, var(--lightblue) 74%);
             border-radius: 20px;
@@ -158,15 +158,15 @@
             transition: transform 80ms ease-in;
         }
 
-        .form>.btn {
+        .form>#button,#signIn,#signUp {
             margin-top: 1.5rem;
         }
 
-        .btn:active {
+        #button,#signIn,#signUp:active {
             transform: scale(0.95);
         }
 
-        .btn:focus {
+        #button,#signIn,#signUp:focus {
             outline: none;
         }
 
@@ -292,7 +292,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                 
-                <button class="btn" type="submit">Sign Up</button>
+                <button class="btn" id="button" type="submit">Sign Up</button>
             </form>
         </div>
 
@@ -319,7 +319,7 @@ unset($__errorArgs, $__bag); ?>
                 <input type="email" id="email" name="email" placeholder="email" class="input" />
                 <input type="password" id="email" name="password" placeholder="password" class="input" />
                 
-                <button class="btn" type="submit">Sign In</button>
+                <button class="btn" id="button" type="submit">Sign In</button>
             </form>
 
 

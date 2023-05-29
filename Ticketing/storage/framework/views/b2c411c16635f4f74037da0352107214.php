@@ -1,27 +1,29 @@
-@extends('layouts.main')
 
-@section('container')
+
+<?php $__env->startSection('container'); ?>
     <div class="row pb-5 mb-4" >
         <div class="col-md-8">
-            <img src="/img/{{ $concert->pict }}" class="img-fluid rounded" alt="Image"
+            <img src="/img/<?php echo e($concert->pict); ?>" class="img-fluid rounded" alt="Image"
                 style="height: 270px;width: 850px;background-size: contain">
         </div>
         <div class="col-md-4">
             <div class="card" style="width: 100%;background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); ">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $concert->nama }}</h5>
-                    <p class="card-text text-muted"><i class="fa fa-calendar"></i> {{ $concert->tanggal }}</p>
+                    <h5 class="card-title"><?php echo e($concert->nama); ?></h5>
+                    <p class="card-text text-muted"><i class="fa fa-calendar"></i> <?php echo e($concert->tanggal); ?></p>
                     <p class="card-text text-muted">
-                        <i class="fa fa-clock-o"></i> {{ $concert->waktu }}
+                        <i class="fa fa-clock-o"></i> <?php echo e($concert->waktu); ?>
+
                     </p>
                     <p class="card-text text-muted"><i class="fa fa-map-marker"></i>
-                        {{ $concert->tempat }}</p>
-                    <p class="card-text">{{ $concert->harga }}</p>
+                        <?php echo e($concert->tempat); ?></p>
+                    <p class="card-text"><?php echo e($concert->harga); ?></p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <p class="card-text text-muted">Diselenggarakan oleh</p>
-                        {{ $concert->vendor }}
+                        <?php echo e($concert->vendor); ?>
+
                     </li>
                 </ul>
             </div>
@@ -34,7 +36,10 @@
         <div class="terms col-md-8">
             <h2> Terms & Condition</h2>
             <hr>
-            {!! $concert->terms !!}
+            <?php echo $concert->terms; ?>
+
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\app\TicketingWeb\Ticketing\resources\views/concert.blade.php ENDPATH**/ ?>

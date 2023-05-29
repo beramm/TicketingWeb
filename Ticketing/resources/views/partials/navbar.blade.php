@@ -17,10 +17,25 @@
         <div class="offcanvas-body ">
             <ul class="navbar-nav justify-content-center justify-content-lg-end flex-grow-1 pe-3 "
                 style="margin-right: 10px;">
-                <li class="nav-item " style="margin-right: 10px;">
-                    <a class="nav-link" title="Click to see HomePage" href="/home">HomePage</a>
-                </li>
+                <ul class="navbar-nav">
+                    <div style="width: 550px; min-width: 300px;">
+                        <form class="d-flex ms-auto" role="search" action="/posts" method="GET">
+                            @if (request('category'))
+                                <input type="hidden" name="category" value="{{ request('category') }}">
+                            @endif
+                            @if (request('author'))
+                                <input type="hidden" name="author" value="{{ request('author') }}">
+                            @endif
+                            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search"
+                                name="search" value={{ request('search') }}>
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
 
+                </ul>
+                <li class="nav-item " style="margin-right: 10px;">
+                    <a class="nav-link" title="Click to see HomePage" href="/">HomePage</a>
+                </li>
 
                 <li class="nav-item dropdown" style="margin-right: 10px;">
 
