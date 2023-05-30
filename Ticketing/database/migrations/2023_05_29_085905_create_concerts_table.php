@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->string('vendor');
             $table->longText('terms');
+            $table->string('tempat');
             $table->timestamps();
         });
     }  

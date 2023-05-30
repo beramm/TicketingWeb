@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Concert;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,5 +20,9 @@ class DatabaseSeeder extends Seeder
              'email' => 'test@example.com',
              'password' => '12345',
          ]);
+
+
+
+         Concert::factory(10)->create();
     }
 }

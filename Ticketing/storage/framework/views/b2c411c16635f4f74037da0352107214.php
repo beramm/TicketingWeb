@@ -17,7 +17,9 @@
                     </p>
                     <p class="card-text text-muted"><i class="fa fa-map-marker"></i>
                         <?php echo e($concert->tempat); ?></p>
-                    <p class="card-text"><?php echo e($concert->harga); ?></p>
+
+                        
+                    <p class="card-text"> Rp <?php echo e(number_format($concert->harga, 0, ',', '.')); ?></p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
@@ -28,7 +30,7 @@
                 </ul>
             </div>
             <div class="py-3 px-3 mt-4 d-flex justify-content-center rounded"
-                style="background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); ">
+                style="position: static;background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); ">
                 <button type="button" class="btn btn-dark " style="width: 100%">Beli Tiket</button>
             </div>
 
