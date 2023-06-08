@@ -20,7 +20,7 @@ class TicketsFactory extends Factory
     {
         $venue = ['cat1', 'cat2', 'cat3', 'cat4'];
         return [
-            'idKonser' => Concerts::inRandomOrder()->first()->idKonser,
+            'concerts_id' => Concerts::inRandomOrder()->first()->id,
             'venue' => fake()->randomElement($venue)
         ];
     }

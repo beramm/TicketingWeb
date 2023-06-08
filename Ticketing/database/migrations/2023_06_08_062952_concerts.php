@@ -12,11 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('concerts', function (Blueprint $table){
-            $table->id('idKonser');
-            $table->unsignedBigInteger('idVendor');
-            $table->foreign('idVendor')->references('idVendor')->on('vendors');
-            $table->unsignedBigInteger('idKategori');
-            $table->foreign('idKategori')->references('idKategori')->on('categories');
+            $table->id();
+            $table->foreignId('vendors_id');
+            $table->foreignId('categories_id');
             $table->string('nama');
             $table->string('slug');
             $table->string('pict');

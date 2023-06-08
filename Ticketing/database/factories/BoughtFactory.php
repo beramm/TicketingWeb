@@ -19,8 +19,8 @@ class BoughtFactory extends Factory
     public function definition(): array
     {
         return [
-            'idUser' => User::inRandomOrder()->first()->idUser,
-            'idTiket' => Tickets::inRandomOrder()->first()->idTiket,
+            'users_id' => User::inRandomOrder()->first()->id,
+            'tickets_id' => Tickets::inRandomOrder()->first()->id,
             'jumlah' => fake()->numberBetween(1,10),
         ];
     }

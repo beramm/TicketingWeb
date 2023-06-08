@@ -9,5 +9,8 @@ class Vendors extends Model
 {
     use HasFactory;
     protected $table = 'vendors';
-    protected $primaryKey = 'idVendor';
+    public function Concerts()
+    {
+        return $this->hasOne(Concerts::class);
+    }
 }

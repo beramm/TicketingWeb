@@ -9,11 +9,14 @@ class Concerts extends Model
 {
     use HasFactory;
     protected $table = 'concerts';
-    protected $primaryKey = 'idKonser';
     public function Vendors(){
-        return $this->belongsTo(Vendors::class, 'idVendor', 'idVendor');
+        return $this->belongsTo(Vendors::class);
     }
     public function Categories(){
-        return $this->belongsTo(Categories::class, 'idKategori', 'idKategori');
+        return $this->belongsTo(Categories::class);
+    }
+    public function Tickets()
+    {
+        return $this->hasMany(Tickets::class);
     }
 }

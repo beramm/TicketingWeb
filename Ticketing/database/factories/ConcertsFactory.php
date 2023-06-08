@@ -19,8 +19,8 @@ class ConcertsFactory extends Factory
     public function definition(): array
     {
         return [
-            'idVendor' => Vendors::inRandomOrder()->first()->idVendor,
-            'idKategori' => Categories::inRandomOrder()->first()->idKategori,
+            'vendors_id' => Vendors::inRandomOrder()->first()->id,
+            'categories_id' => Categories::inRandomOrder()->first()->id,
             'nama' => fake()->name(),
             'slug' => fake()->slug(),
             'pict' => "bruno3.jpg",

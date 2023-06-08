@@ -9,5 +9,8 @@ class Categories extends Model
 {
     use HasFactory;
     protected $table = 'categories';
-    protected $primaryKey = 'idKategori';
+    public function Concerts()
+    {
+        return $this->hasOne(Concerts::class);
+    }
 }

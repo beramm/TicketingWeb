@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->id('idTiket');
-            $table->unsignedBigInteger('idKonser');
-            $table->foreign('idKonser')->references('idKonser')->on('concerts');
+            $table->id();
+            $table->foreignId('concerts_id');
             $table->string('venue');
             $table->timestamps();
         });
