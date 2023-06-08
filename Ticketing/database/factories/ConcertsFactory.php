@@ -2,12 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\Categories;
+use App\Models\Vendors;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Concert>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Concerts>
  */
-class ConcertFactory extends Factory
+class ConcertsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,14 +19,15 @@ class ConcertFactory extends Factory
     public function definition(): array
     {
         return [
+            'idVendor' => Vendors::inRandomOrder()->first()->idVendor,
+            'idKategori' => Categories::inRandomOrder()->first()->idKategori,
             'nama' => fake()->name(),
             'slug' => fake()->slug(),
             'pict' => "bruno3.jpg",
             'tanggal' => fake()->dateTimeThisYear('+3 months'),
             'waktu' => "20:00 - 22:00",
-            'vendor' => fake()->company(),
-            'harga'=>fake()->numberBetween(700000,3500000),
-            'tempat'=>'GBK Hall Jakarta',
+            'harga' => fake()->numberBetween(700000, 3500000),
+            'tempat' => 'GBK Hall Jakarta',
             'terms' => "
             <ol>
 <li>

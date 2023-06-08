@@ -16,8 +16,6 @@
                     </p>
                     <p class="card-text text-muted"><i class="fa fa-map-marker"></i>
                         {{ $concert->tempat }}</p>
-
-                        
                     <p class="card-text"> Rp {{ number_format($concert->harga, 0, ',', '.') }}</p>
                 </div>
                 <ul class="list-group list-group-flush">

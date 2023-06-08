@@ -11,20 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('concerts', function (Blueprint $table) {
-            $table->id();
+        Schema::create('concerts', function (Blueprint $table){
+            $table->id('idKonser');
+            $table->unsignedBigInteger('idVendor');
+            $table->foreign('idVendor')->references('idVendor')->on('vendors');
+            $table->unsignedBigInteger('idKategori');
+            $table->foreign('idKategori')->references('idKategori')->on('categories');
             $table->string('nama');
             $table->string('slug');
             $table->string('pict');
             $table->string('tanggal');
             $table->string('waktu');
             $table->integer('harga');
-            $table->string('vendor');
             $table->longText('terms');
             $table->string('tempat');
             $table->timestamps();
         });
-    }  
+        
+    }
 
     /**
      * Reverse the migrations.

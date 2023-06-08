@@ -78,7 +78,7 @@
         <div class="row">
             @foreach ($concerts as $concert)
                 <div class="col-md-3 mb-4">
-                    <a href="/concerts/{{ $concert->id }}" class="text-decoration-none text-dark">
+                    <a href="/concerts/{{ $concert->idKonser }}" class="text-decoration-none text-dark">
                         <div class="card rounded" style="width: 18rem;">
                             <img src="https://picsum.photos/id/{{ rand(1, 200) }}/100" class="card-img-top" alt="...">
                             <div class="card-body">

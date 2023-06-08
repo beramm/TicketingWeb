@@ -4,7 +4,7 @@
         aria-controls="navbarOffcanvasLg" style="margin-left: 15px;">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand me-auto text-white" href="/home"
+    <a class="navbar-brand me-auto text-white" href="/"
         style="text-align: left; margin-left: 15px; margin-right: 50px;">
         <img src="/img/logo1.png" style="width: 95px; margin-right: 20px" id="pictAll">
         <span class="diss">TicketVerse</span>

@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
-class Concert extends Model
+class Categories extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
-    
+    protected $table = 'categories';
+    protected $primaryKey = 'idKategori';
 }
