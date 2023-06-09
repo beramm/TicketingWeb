@@ -11,6 +11,6 @@ class Categories extends Model
     protected $table = 'categories';
     public function Concerts()
     {
-        return $this->hasOne(Concerts::class);
+        return $this->hasMany (Concerts::class);
     }
 }

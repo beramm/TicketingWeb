@@ -2,9 +2,11 @@
 
 use Carbon\Carbon;
 use App\Models\Concert;
+use App\Models\Categories;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConcertController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -43,6 +45,7 @@ Route::middleware(['guest'])->group(function () {
 //Route::get('/{path?}', [HomeController::class, 'index'])->where('path', '^$|home')->name('homepage');
 
 Route::get('/', [ConcertController::class, 'index'])->name('homepage');
+Route::get('/concerts', [ConcertController::class, 'index']);
 //singular
 Route::get('concerts/{concert}', [ConcertController::class, 'show']);
 //end route concerts (all)
@@ -50,3 +53,11 @@ Route::get('concerts/{concert}', [ConcertController::class, 'show']);
 //start route about
 Route::get('/about', [AboutController::class, 'index']);
 //end route about
+
+Route::get('/categories/{Categories:slug}', function (Categories $Categories) {
+    return view('concerts', [
+        'concerts' => $Categories->Concerts
+    ]);
+});
+
+//Route::get('/categories/{Categories:slug}',[CategoryController::class,'show']);

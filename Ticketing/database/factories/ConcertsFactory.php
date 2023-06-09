@@ -24,7 +24,7 @@ class ConcertsFactory extends Factory
             'nama' => fake()->name(),
             'slug' => fake()->slug(),
             'pict' => "bruno3.jpg",
-            'tanggal' => fake()->dateTimeThisYear('+3 months'),
+            'tanggal' => fake()->dateTimeThisYear('+3 months')->format('Y-m-d'),
             'waktu' => "20:00 - 22:00",
             'harga' => fake()->numberBetween(700000, 3500000),
             'tempat' => 'GBK Hall Jakarta',

@@ -1,10 +1,8 @@
-
-
 <?php $__env->startSection('container'); ?>
-    <div class="row pb-5 mb-4" >
+    <div class="row pb-5 mb-4">
         <div class="col-md-8">
             <img src="/img/<?php echo e($concert->pict); ?>" class="img-fluid rounded" alt="Image"
-                style="height: 270px;width: 850px;background-size: contain">
+                style="height: 270px;width: 850px;object-fit: cover">
         </div>
         <div class="col-md-4">
             <div class="card" style="width: 100%;background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); ">
@@ -17,21 +15,23 @@
                     </p>
                     <p class="card-text text-muted"><i class="fa fa-map-marker"></i>
                         <?php echo e($concert->tempat); ?></p>
-
-                        
                     <p class="card-text"> Rp <?php echo e(number_format($concert->harga, 0, ',', '.')); ?></p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <p class="card-text text-muted">Diselenggarakan oleh</p>
-                        <?php echo e($concert->vendor); ?>
+                        <p class="card-text text-muted">Diselenggarakan oleh <?php echo e($concert->vendors->nama); ?>
 
+                        </p>
                     </li>
                 </ul>
             </div>
             <div class="py-3 px-3 mt-4 d-flex justify-content-center rounded"
-                style="position: static;background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); ">
-                <button type="button" class="btn btn-dark " style="width: 100%">Beli Tiket</button>
+                style="background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);">
+                <a href="/concerts/buy/<?php echo e($concert->id); ?>">
+                    <button type="button" class="btn btn-dark " style="width: 100%;position: sticky; top: 0">Beli
+                        Tiket</button>
+                </a>
+
             </div>
 
         </div>

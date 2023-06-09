@@ -1,11 +1,10 @@
-<nav class="navbar navbar-expand-lg bg-dark">
+<nav class="navbar navbar-expand-lg bg-dark" style="position: sticky; top: 0; z-index: 9999;">
 
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg"
         aria-controls="navbarOffcanvasLg" style="margin-left: 15px;">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand me-auto text-white" href="/home"
-        style="text-align: left; margin-left: 15px; margin-right: 50px;">
+    <a class="navbar-brand me-auto text-white" href="/" style="text-align: left; margin-left: 15px; ">
         <img src="/img/logo1.png" style="width: 95px; margin-right: 20px" id="pictAll">
         <span class="diss">TicketVerse</span>
     </a>
@@ -14,24 +13,21 @@
         <div class="offcanvas-header">
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body ">
-            <ul class="navbar-nav justify-content-center justify-content-lg-end flex-grow-1 pe-3 "
-                style="margin-right: 10px;">
-                <ul class="navbar-nav">
-                    <div style="width: 550px; min-width: 300px;">
-                        <form class="d-flex ms-auto" role="search" action="/posts" method="GET">
-                            <?php if(request('category')): ?>
-                                <input type="hidden" name="category" value="<?php echo e(request('category')); ?>">
-                            <?php endif; ?>
-                            <?php if(request('author')): ?>
-                                <input type="hidden" name="author" value="<?php echo e(request('author')); ?>">
-                            <?php endif; ?>
-                            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search"
-                                name="search" value=<?php echo e(request('search')); ?>>
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav" style="margin-right: 10px;">
+                <ul class="navbar-nav justify-content-center justify-content-lg-end flex-grow-1 pe-3"
+                    style="margin-right: 200px; margin-left: 50px">
+                    <ul class="navbar-nav">
+                        <div style="width: 550px; min-width: 300px;">
 
+                            <form class="d-flex ms-auto" role="search" action="/concerts" method="GET">
+                                <input class="form-control me-2" type="text" placeholder="Search here.."
+                                    name="search" value="<?php echo e(request('search')); ?>">
+                                <button class="btn btn-outline-light" type="submit">Search</button>
+                            </form>
+
+                        </div>
+                    </ul>
                 </ul>
                 <li class="nav-item " style="margin-right: 10px;">
                     <a class="nav-link" title="Click to see HomePage" href="/">HomePage</a>
@@ -44,17 +40,11 @@
                         Category
                     </a>
                     <ul class="dropdown-menu dropdown-hover" data-bs-auto-close="false">
-                        <li><a class="dropdown-item" href="">Jass</a>
-                        </li>
-                        <li><a class="dropdown-item" href="#">Pop</a>
-                        </li>
-                        
-                        <li><a class="dropdown-item" href="#">K-Pop
-                            </a></li>
-                        <li><a class="dropdown-item" href="#">R&B</a></li>
-                        <li><a class="dropdown-item" href="#">Rock
-                            </a></li>
-                        <li><a class="dropdown-item" href="#">Hip-Hop</a></li>
+                        <?php $__currentLoopData = App\Models\Categories::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><a class="dropdown-item"
+                                    href="/categories/<?php echo e($category->slug); ?>"><?php echo e($category->kategori); ?></a>
+                            </li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </li>
                 <li class="nav-item text-white " style="margin-right: 10px;">

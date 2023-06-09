@@ -10,8 +10,14 @@ class ConcertController extends Controller
     //
     public function index()
     {
+        $concerts = Concerts::latest();
+
+        if (request('search')) {
+            $concerts->where('nama', 'like', '%' . request('search') . '%');
+        }
+
         return view('homepage', [
-            "concerts" => Concerts::all()
+            "concerts" =>$concerts->get()
         ]);
     }
     public function show(Concerts $concert)

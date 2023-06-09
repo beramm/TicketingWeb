@@ -18,7 +18,8 @@ class CategoriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'kategori' => 'Pop',
+            'kategori' => fake()->userName(),
+            'slug'=>fake()->slug()
         ];
     }
 }

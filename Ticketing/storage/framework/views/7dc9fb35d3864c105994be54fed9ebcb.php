@@ -1,34 +1,7 @@
 <?php $__env->startSection('container'); ?>
-    
-    <style>
-        .carousel-control-next,
-        .carousel-control-prev {
-            background-color: rgba(0, 0, 0, 0.8);
-            width: 50px;
-            height: 50px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            transition: transform 0.5s ease-in-out;
-            align-items: center;
-            justify-content: center;
-            top: 40%;
-        }
+    <link rel="stylesheet" href="/css/homeStyles.css">
 
-        /* .carousel:hover .carousel-control-prev,
-                                                .carousel:hover .carousel-control-next {
-                                                    display: block;
 
-                                                } */
-
-        .carousel:hover .carousel-control-prev {
-            transform: translateX(-50%);
-        }
-
-        .carousel:hover .carousel-control-next {
-            transform: translateX(50%);
-        }
-    </style>
     <div class="main mt-5" style="height: 350px; max-height: 350px">
         <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
             <div class="carousel-inner">
@@ -55,29 +28,41 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container1">
         <div class="row">
-            <?php $__currentLoopData = $concerts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $concert): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="col-md-3 mb-4">
-                    <a href="/concerts/<?php echo e($concert->id); ?>" class="text-decoration-none text-dark">
-                        <div class="card rounded" style="width: 18rem;">
-                            <img src="https://picsum.photos/id/<?php echo e(rand(1, 200)); ?>/100" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo e($concert->nama); ?></h5>
-                                <p class="card-text text-muted"><?php echo e($concert->tanggal); ?></p>
-                                <p class="card-text "><strong>
-                                        Rp <?php echo e(number_format($concert->harga, 0, ',', '.')); ?>
+            <div class="container">
+                <h1 class="upcomming">Upcoming Concerts</h1>
+                <?php $__currentLoopData = $concerts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $concert): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="item">
+                        <div class="item-right">
+                            <h2 class="num"><?php echo e(date('d', strtotime($concert->tanggal))); ?></h2>
+                            <p class="day"><?php echo e(date('M', strtotime($concert->tanggal))); ?></p>
+                            <span class="up-border"></span>
+                            <span class="down-border"></span>
+                        </div> <!-- end item-right -->
 
-                                    </strong>
-                                </p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><?php echo e($concert->vendor); ?></li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <div class="item-left">
+                            <p class="event"><?php echo e($concert->Categories->kategori); ?> Music</p>
+                            <h2 class="title"><?php echo e($concert->nama); ?></h2>
+
+                            <p class="card-text text-muted"><i class="fa fa-calendar"></i> <?php echo e($concert->tanggal); ?>
+
+                                <br> <i class="fa fa-clock-o" style="margin-top: 7px"></i>
+                                <?php echo e($concert->waktu); ?>
+
+                                <br><i class="fa fa-map-marker" style="margin-top: 7px"></i>
+                                <?php echo e($concert->tempat); ?>
+
+                            </p>
+
+                            <div class="fix"></div>
+                            <a href="/concerts/<?php echo e($concert->id); ?>" class="text-decoration-none text-dark">
+                                <button class="tickets">Tickets</button>
+                            </a>
+                        </div> <!-- end item-right -->
+                    </div> <!-- end item -->
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
         </div>
     </div>
 <?php $__env->stopSection(); ?>

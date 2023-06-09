@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->times(50)->create();
-        Vendors::factory()->times(30)->create();
-        Categories::factory()->create();
+        User::factory()->times(10)->create();
+        Vendors::factory()->times(10)->create();
+        Categories::factory()->times(7)->create();
         Concerts::factory()->times(20)->create();
         Tickets::factory()->times(10)->create();
         Bought::factory()->times(100)->create();
