@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="container1">
+    <div class="container1 mb-3">
         <div class="row">
             <div class="container">
                 <h1 class="upcomming">Upcoming Concerts</h1>

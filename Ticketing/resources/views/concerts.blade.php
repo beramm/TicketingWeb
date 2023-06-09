@@ -29,39 +29,50 @@
             </button>
         </div>
     </div>
+    @if ($concerts->count())
+        <div class="container1 mb-3">
+            <div class="row">
+                <div class="container">
+                    <h1 class="upcomming">Upcoming {{ $title }} Concerts</h1>
+                    @foreach ($concerts as $concert)
+                        <div class="item">
+                            <div class="item-right">
+                                <h2 class="num">{{ date('d', strtotime($concert->tanggal)) }}</h2>
+                                <p class="day">{{ date('M', strtotime($concert->tanggal)) }}</p>
+                                <span class="up-border"></span>
+                                <span class="down-border"></span>
+                            </div> <!-- end item-right -->
 
-    <div class="container1">
-        <div class="row">
-            <div class="container">
-                <h1 class="upcomming">Upcoming Concerts</h1>
-                @foreach ($concerts as $concert)
-                    <div class="item">
-                        <div class="item-right">
-                            <h2 class="num">{{ date('d', strtotime($concert->tanggal)) }}</h2>
-                            <p class="day">{{ date('M', strtotime($concert->tanggal)) }}</p>
-                            <span class="up-border"></span>
-                            <span class="down-border"></span>
-                        </div> <!-- end item-right -->
+                            <div class="item-left">
+                                <a class="text-decoration-none" href="/concerts?category={{ $concert->Categories->slug }}">
+                                    <p class="event">{{ $concert->Categories->kategori }} Music</p>
+                                </a>
+                                <h2 class="title">{{ $concert->nama }}</h2>
 
-                        <div class="item-left">
-                            <p class="event">{{ $concert->Categories->kategori }} Music</p>
-                            <h2 class="title">{{ $concert->nama }}</h2>
+                                <p class="card-text text-muted"><i class="fa fa-calendar"></i> {{ $concert->tanggal }}
+                                    <br> <i class="fa fa-clock-o" style="margin-top: 7px"></i>
+                                    {{ $concert->waktu }}
+                                    <br><i class="fa fa-map-marker" style="margin-top: 7px"></i>
+                                    {{ $concert->tempat }}
+                                </p>
 
-                            <p class="card-text text-muted"><i class="fa fa-calendar"></i> {{ $concert->tanggal }}
-                                <br> <i class="fa fa-clock-o" style="margin-top: 7px"></i>
-                                {{ $concert->waktu }}
-                                <br><i class="fa fa-map-marker" style="margin-top: 7px"></i>
-                                {{ $concert->tempat }}
-                            </p>
-
-                            <div class="fix"></div>
-                            <a href="/concerts/{{ $concert->id }}" class="text-decoration-none text-dark">
-                                <button class="tickets">Tickets</button>
-                            </a>
-                        </div> <!-- end item-right -->
-                    </div> <!-- end item -->
-                @endforeach
+                                <div class="fix"></div>
+                                <a href="/concerts/{{ $concert->id }}" class="text-decoration-none text-dark">
+                                    <button class="tickets">Tickets</button>
+                                </a>
+                            </div> <!-- end item-right -->
+                        </div> <!-- end item -->
+                    @endforeach
+                </div>
             </div>
         </div>
+    @else
+        <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+            <h5 class="text-center fs-4">No Post Found.</h5>
+        </div>
+    @endif
+    <div class="d-flex justify-content-center">
+        {{ $concerts->links() }}
     </div>
+
 @endsection

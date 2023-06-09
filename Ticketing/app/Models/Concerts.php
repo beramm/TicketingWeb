@@ -9,6 +9,20 @@ class Concerts extends Model
 {
     use HasFactory;
     protected $table = 'concerts';
+
+    public function scopeFilter($query, array $filters)
+    {
+
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('nama', 'like', '%' . $search . '%');
+        });
+
+        $query->when($filters['category'] ?? false, function($query,$category){
+            return $query->whereHas('Categories',function($query) use ($category){
+                $query->where('slug',$category);
+            });
+        });
+    }
     public function Vendors()
     {
         return $this->belongsTo(Vendors::class);

@@ -1,3 +1,15 @@
+.pagination .page-link {
+    color: #000000;
+    /* Set your desired color */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #929292;
+    /* Set your desired background color */
+    border-color: #ffffff;
+    /* Set your desired border color */
+}
+
 .carousel-control-next,
 .carousel-control-prev {
     background-color: rgba(0, 0, 0, 0.8);

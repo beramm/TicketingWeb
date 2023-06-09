@@ -20,6 +20,7 @@
         .navbar-nav .nav-link {
             color: white !important;
         }
+        
     </style>
 </head>
 

@@ -16,11 +16,14 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav" style="margin-right: 10px;">
                 <ul class="navbar-nav justify-content-center justify-content-lg-end flex-grow-1 pe-3"
-                    style="margin-right: 200px; margin-left: 50px">
+                    style="margin-right: 150px; margin-left: 50px">
                     <ul class="navbar-nav">
                         <div style="width: 550px; min-width: 300px;">
 
                             <form class="d-flex ms-auto" role="search" action="/concerts" method="GET">
+                                @if (request('category'))
+                                    <input type="hidden" name="category" value="{{ request('category') }}">
+                                @endif
                                 <input class="form-control me-2" type="text" placeholder="Search here.."
                                     name="search" value="{{ request('search') }}">
                                 <button class="btn btn-outline-light" type="submit">Search</button>
@@ -42,7 +45,7 @@
                     <ul class="dropdown-menu dropdown-hover" data-bs-auto-close="false">
                         @foreach (App\Models\Categories::all() as $category)
                             <li><a class="dropdown-item"
-                                    href="/categories/{{ $category->slug }}">{{ $category->kategori }}</a>
+                                    href="/concerts?category={{ $category->slug }}">{{ $category->kategori }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -65,15 +68,21 @@
                                 Personal
                             </a>
                             <ul class="dropdown-menu dropdown-hover" data-bs-auto-close="false">
-                                <li class="text-dark"><a class="dropdown-item" href="{{ route('login') }}">Profile <i
-                                            class="bi bi-person-circle"></i>
+                                <li class="text-dark"><a class="dropdown-item" href="{{ route('login') }}"><i
+                                            class="bi bi-person-circle"></i> Profile
                                     </a>
                                 </li>
+                                @if (auth()->user()->isAdmin === 1)
+                                    <li class="text-dark"><a class="dropdown-item" href="/Dashboard"><i
+                                                class="bi bi-layout-text-sidebar"></i> Dashboard
+                                        </a>
+                                    </li>
+                                @endif
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li class="text-dark"><a class="dropdown-item" href="{{ route('logout') }}">Logout <i
-                                            class="fa fa-sign-out"></i></a>
+                                <li class="text-dark"><a class="dropdown-item" href="{{ route('logout') }}"><i
+                                            class="fa fa-sign-out"></i> Logout</a>
                                 </li>
                             </ul>
                         </li>
