@@ -1,19 +1,7 @@
 <?php $__env->startSection('container'); ?>
     <link rel="stylesheet" href="/css/homeStyles.css">
 
-    <style>
-        .pagination .page-link {
-            color: #000000;
-            /* Set your desired color */
-        }
-
-        .pagination .page-item.active .page-link {
-            background-color: #929292;
-            /* Set your desired background color */
-            border-color: #ffffff;
-            /* Set your desired border color */
-        }
-    </style>
+    
 
     <?php if($concerts->count()): ?>
         <div class="main mt-5" style="height: 350px; max-height: 350px">

@@ -77,6 +77,11 @@
                                                 class="bi bi-layout-text-sidebar"></i> Dashboard
                                         </a>
                                     </li>
+                                <?php else: ?>
+                                    <li class="text-dark"><a class="dropdown-item" href="/Dashboard"><i
+                                                class="bi bi-ticket-detailed-fill"></i></i> Ticket Ordered
+                                        </a>
+                                    </li>
                                 <?php endif; ?>
                                 <li>
                                     <hr class="dropdown-divider">
