@@ -73,12 +73,12 @@
                                     </a>
                                 </li>
                                 @if (auth()->user()->isAdmin === 1)
-                                    <li class="text-dark"><a class="dropdown-item" href="/Dashboard"><i
+                                    <li class="text-dark"><a class="dropdown-item" href="/dashboard"><i
                                                 class="bi bi-layout-text-sidebar"></i> Dashboard
                                         </a>
                                     </li>
                                 @else
-                                    <li class="text-dark"><a class="dropdown-item" href="/Ordered"><i
+                                    <li class="text-dark"><a class="dropdown-item" href="/ordered"><i
                                                 class="bi bi-ticket-detailed-fill"></i></i> Ticket Ordered
                                         </a>
                                     </li>

@@ -15,7 +15,7 @@ class ConcertController extends Controller
 
         if (request('category')) {
             $category = Categories::firstWhere('slug', request('category'));
-            $title = ''.$category->kategori.'\'s';
+            $title = '' . $category->kategori . '\'s';
         }
 
         return view('homepage', [

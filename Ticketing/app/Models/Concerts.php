@@ -36,4 +36,8 @@ class Concerts extends Model
     {
         return $this->hasMany(Tickets::class);
     }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

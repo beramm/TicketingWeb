@@ -3,11 +3,13 @@
 use Carbon\Carbon;
 use App\Models\Concert;
 use App\Models\Categories;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConcertController;
+use App\Http\Controllers\DashboardConcertController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 /*
@@ -60,4 +62,21 @@ Route::get('/categories/{Categories:slug}', function (Categories $Categories) {
     ]);
 });
 
-//Route::get('/categories/{Categories:slug}',[CategoryController::class,'show']);
+
+Route::get('/dashboard', function () {
+    if (auth()->user()->isAdmin === 1) {
+        return view('dashboard.index');
+    } else {
+        return redirect('/'); // Redirect to another route if not an admin
+    }
+})->middleware('auth');
+
+// Route::resource('/dashboard/concerts', DashboardConcertController::class)->middleware('auth');
+
+//routing ke method show secara manual
+Route::get('/dashboard/concerts/{concerts}', [DashboardConcertController::class, 'show'])->middleware('auth');
+
+//Route::resource-nya benerin supaya semua method bisa secara otomatis dijalankan KECUALI method show dengan cara sbb:
+Route::resource('/dashboard/concerts/', DashboardConcertController::class)->except([
+    'show',
+])->middleware('auth');
