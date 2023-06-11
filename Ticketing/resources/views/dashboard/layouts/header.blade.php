@@ -8,12 +8,12 @@
         aria-label="Search">
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <form action="/logout" method="post">
-                @csrf
+            <a class="dropdown-item" href="{{ route('logout') }}">
                 <button type="submit" class="nav-link px-3 bg-dark border-0">Logout
                     <span data-feather="log-out"></span> </i>
                 </button>
-            </form>
+            </a>
+
         </div>
     </div>
 </header>

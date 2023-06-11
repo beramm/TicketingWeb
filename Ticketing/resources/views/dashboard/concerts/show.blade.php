@@ -30,6 +30,7 @@
             <div class="card" style="width: 100%;background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); ">
                 <div class="card-body">
                     <h5 class="card-title">{{ $concert->nama }}</h5>
+                    <h5 class="card-title">{{ $concert->categories->kategori }}</h5>
                     <p class="card-text text-muted"><i class="fa fa-calendar"></i> {{ $concert->tanggal }}</p>
                     <p class="card-text text-muted">
                         <i class="fa fa-clock-o"></i> {{ $concert->waktu }}
@@ -40,8 +41,8 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        {{-- <p class="card-text text-muted">Diselenggarakan oleh {{ $concert->vendors->nama }}
-                        </p> --}}
+                        <p class="card-text text-muted">Diselenggarakan oleh {{ $concert->vendors->nama }}
+                        </p>
                     </li>
                 </ul>
             </div>

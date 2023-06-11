@@ -15,10 +15,10 @@ class DashboardConcertController extends Controller
         //
         if (auth()->user()->isAdmin === 1) {
             return view('dashboard.concerts.index', [
-                'concerts' => Concerts::all()
+                'concerts' => Concerts::paginate(15)->withQueryString()
             ]);
         } else {
-            return view('/');
+            return view('homepage');
         }
     }
 
@@ -27,7 +27,11 @@ class DashboardConcertController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            return view('dashboard.concerts.create');
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
@@ -41,13 +45,16 @@ class DashboardConcertController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Concerts $concerts)
+    public function show(Concerts $concert)
     {
         // return $concerts;
-        
-        return view('dashboard.concerts.show', [
-            "concert"=>$concerts
-        ]);
+        if (auth()->user()->isAdmin === 1) {
+            return view('dashboard.concerts.show', [
+                "concert" => $concert
+            ]);
+        } else {
+            return view('homepage');
+        }
     }
 
     /**

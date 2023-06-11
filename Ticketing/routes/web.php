@@ -71,12 +71,6 @@ Route::get('/dashboard', function () {
     }
 })->middleware('auth');
 
-// Route::resource('/dashboard/concerts', DashboardConcertController::class)->middleware('auth');
 
-//routing ke method show secara manual
-Route::get('/dashboard/concerts/{concerts}', [DashboardConcertController::class, 'show'])->middleware('auth');
 
-//Route::resource-nya benerin supaya semua method bisa secara otomatis dijalankan KECUALI method show dengan cara sbb:
-Route::resource('/dashboard/concerts/', DashboardConcertController::class)->except([
-    'show',
-])->middleware('auth');
+Route::resource('/dashboard/concerts', DashboardConcertController::class)->middleware('auth');
