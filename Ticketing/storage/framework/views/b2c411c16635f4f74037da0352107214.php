@@ -31,7 +31,6 @@
                     <button type="button" class="btn btn-dark " style="width: 100%;position: sticky; top: 0">Beli
                         Tiket</button>
                 </a>
-
             </div>
 
         </div>

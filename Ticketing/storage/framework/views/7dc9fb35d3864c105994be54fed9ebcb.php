@@ -59,7 +59,7 @@
                                 </p>
 
                                 <div class="fix"></div>
-                                <a href="/concerts/<?php echo e($concert->id); ?>" class="text-decoration-none text-dark">
+                                <a href="/concerts/<?php echo e($concert->slug); ?>" class="text-decoration-none text-dark">
                                     <button class="tickets">Tickets</button>
                                 </a>
                             </div> <!-- end item-right -->

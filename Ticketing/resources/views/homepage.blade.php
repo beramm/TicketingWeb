@@ -58,7 +58,7 @@
                                 </p>
 
                                 <div class="fix"></div>
-                                <a href="/concerts/{{ $concert->id }}" class="text-decoration-none text-dark">
+                                <a href="/concerts/{{ $concert->slug }}" class="text-decoration-none text-dark">
                                     <button class="tickets">Tickets</button>
                                 </a>
                             </div> <!-- end item-right -->
