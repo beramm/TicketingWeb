@@ -12,6 +12,7 @@ use App\Http\Controllers\ConcertController;
 use App\Http\Controllers\DashboardConcertController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,7 @@ use App\Http\Controllers\RegisterController;
 Route::middleware(['auth'])->group(function () {
     Route::view('/profile', 'profile')->name('profile');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/concerts/{concert}/payment', [PaymentController::class, 'show']);
 });
 
 Route::middleware(['guest'])->group(function () {
@@ -49,7 +51,7 @@ Route::middleware(['guest'])->group(function () {
 Route::get('/', [ConcertController::class, 'index'])->name('homepage');
 Route::get('/concerts', [ConcertController::class, 'index']);
 //singular
-Route::get('concerts/{concert}', [ConcertController::class, 'show']);
+Route::get('/concerts/{concert:slug}', [ConcertController::class, 'show']);
 //end route concerts (all)
 
 //start route about

@@ -197,8 +197,8 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\framework/cache/data',
-        'lock_path' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\framework/cache/data',
+        'path' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\framework/cache/data',
+        'lock_path' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -371,13 +371,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\app',
+        'root' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\app',
         'throw' => false,
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\app/public',
+        'root' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\app/public',
         'url' => 'http://ticketing.test.test//storage',
         'visibility' => 'public',
         'throw' => false,
@@ -397,7 +397,7 @@
     ),
     'links' => 
     array (
-      'D:\\app\\TicketingWeb\\Ticketing\\public\\storage' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\app/public',
+      'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\public\\storage' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -436,14 +436,14 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\logs/laravel.log',
         'level' => 'debug',
         'replace_placeholders' => true,
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
         'replace_placeholders' => true,
@@ -508,7 +508,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -575,7 +575,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'D:\\app\\TicketingWeb\\Ticketing\\resources\\views/vendor/mail',
+        0 => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -686,7 +686,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\framework/sessions',
+    'files' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -706,9 +706,9 @@
   array (
     'paths' => 
     array (
-      0 => 'D:\\app\\TicketingWeb\\Ticketing\\resources\\views',
+      0 => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\resources\\views',
     ),
-    'compiled' => 'D:\\app\\TicketingWeb\\Ticketing\\storage\\framework\\views',
+    'compiled' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing\\storage\\framework\\views',
   ),
   'flare' => 
   array (
@@ -784,7 +784,7 @@
     array (
     ),
     'enable_runnable_solutions' => NULL,
-    'remote_sites_path' => 'D:\\app\\TicketingWeb\\Ticketing',
+    'remote_sites_path' => 'C:\\Users\\neisanael\\Documents\\GitHub\\TicketingWeb\\Ticketing',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',

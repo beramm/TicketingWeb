@@ -8,6 +8,7 @@ use App\Models\Concerts;
 use App\Models\Vendors;
 use App\Models\Tickets;
 use App\Models\User;
+use App\Models\Visitors;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,8 +23,9 @@ class DatabaseSeeder extends Seeder
         Vendors::factory()->times(10)->create();
         Categories::factory()->times(7)->create();
         Concerts::factory()->times(20)->create();
-        Tickets::factory()->times(10)->create();
+        Tickets::factory()->times(100)->create();
         Bought::factory()->times(100)->create();
+        Visitors::factory()->times(50)->create();
         
 /*         \App\Models\User::factory(10)->create();
 

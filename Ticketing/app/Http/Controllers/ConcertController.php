@@ -25,8 +25,8 @@ class ConcertController extends Controller
     }
     public function show(Concerts $concert)
     {
-        return (view('concert', [
-            "concert" => $concert
-        ]));
+        return view('concert', [
+            'concert' => $concert
+        ]);
     }
 }

@@ -21,7 +21,9 @@ class TicketsFactory extends Factory
         $venue = ['cat1', 'cat2', 'cat3', 'cat4'];
         return [
             'concerts_id' => Concerts::inRandomOrder()->first()->id,
-            'venue' => fake()->randomElement($venue)
+            'venue' => fake()->randomElement($venue),
+            'harga' => fake()->numberBetween(700000, 3500000),
+            'kuantitas' => fake()->numberBetween(1, 50)
         ];
     }
 }

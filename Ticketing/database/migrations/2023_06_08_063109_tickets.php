@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('concerts_id');
             $table->string('venue');
+            $table->integer('harga');
+            $table->integer('kuantitas');
             $table->timestamps();
         });
     }

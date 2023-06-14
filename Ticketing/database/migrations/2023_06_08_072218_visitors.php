@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->string('nama');
+            $table->integer('nik');
+            $table->integer('telepon');
+            $table->date('kelahiran');
+            $table->timestamps();
         });
     }
 
@@ -21,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('visitors');
     }
 };

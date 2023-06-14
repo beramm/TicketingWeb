@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    //
-    
-
     public function show(Categories $category)
     {
         return view('concerts', [

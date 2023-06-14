@@ -31,8 +31,7 @@ class Concerts extends Model
     {
         return $this->belongsTo(Categories::class);
     }
-
-    public function Tickets()
+    public function tickets()
     {
         return $this->hasMany(Tickets::class);
     }
