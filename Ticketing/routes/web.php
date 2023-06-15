@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/profile', 'profile')->name('profile');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/concerts/{concert}/payment', [PaymentController::class, 'show']);
+    Route::post('/postPayment', [PaymentController::class, 'store']);
 });
 
 Route::middleware(['guest'])->group(function () {

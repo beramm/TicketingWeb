@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <form action="" method="post">
+    <form action="/postPayment" method="post">
         <table class="table table-striped">
             <thead class="table-dark">
                 <tr>
@@ -35,7 +35,7 @@
                                 <input class="form-control" type="number" id="quantity-input-{{ $ticket->id }}"
                                     value="0" oninput="updateLabel({{ $ticket->id }}, this.value)"
                                     data-harga="{{ $ticket->harga }}" data-kuantitas="{{ $ticket->kuantitas }}"
-                                    name="total-input-venue-{{ $ticket->id }}">
+                                    name="total-input-venue[{{ $ticket->id }}]">
                             @endif
                         </td>
                         <td>
@@ -50,7 +50,10 @@
                                         output.textContent = "Rp.0";
                                     } else if (parseInt(value) > parseInt(kuantitas)) {
                                         output.textContent = "Tidak boleh melebihi kuantitas";
-                                    } else {
+                                    } else if(parseInt(value) > 4){
+                                        output.textContent = "Batas Per User 4";
+                                    }
+                                    else {
                                         var total = parseInt(value) * harga;
                                         output.textContent = "Rp." + total.toLocaleString();
                                     }
