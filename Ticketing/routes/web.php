@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardCategoryController;
+use App\Http\Controllers\DashboardVendorController;
 use Carbon\Carbon;
 use App\Models\Concert;
 use App\Models\Categories;
@@ -78,6 +79,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/dashboard/concerts/checkSlug', [DashboardConcertController::class, "checkSlug"])->middleware('auth');
 
+Route::get('/dashboard/categories/checkSlug', [DashboardCategoryController::class, "checkSlug"])->middleware('auth');
+
 Route::resource('/dashboard/concerts', DashboardConcertController::class)->middleware('auth');
 
 Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth');
+
+Route::resource('/dashboard/vendors', DashboardVendorController::class)->middleware('auth');

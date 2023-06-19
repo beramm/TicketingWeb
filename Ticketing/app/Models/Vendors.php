@@ -9,6 +9,7 @@ class Vendors extends Model
 {
     use HasFactory;
     protected $table = 'vendors';
+    protected $guarded = ['id'];
     public function Concerts()
     {
         return $this->hasOne(Concerts::class);

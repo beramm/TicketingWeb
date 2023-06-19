@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardCategoryController extends Controller
 {
@@ -12,7 +13,13 @@ class DashboardCategoryController extends Controller
      */
     public function index()
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            return view('dashboard.categories.index', [
+                'categories' => Categories::latest()->paginate(15)->withQueryString()
+            ]);
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
@@ -20,7 +27,11 @@ class DashboardCategoryController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            return view('dashboard.categories.create');
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
@@ -28,7 +39,16 @@ class DashboardCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            $validatedData = $request->validate([
+                'kategori' => 'required|max:255',
+                'slug' => 'required|unique:categories'
+            ]);
+            Categories::create($validatedData);
+            return redirect('/dashboard/categories')->with('success', 'Succesfully Created');
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
@@ -42,24 +62,60 @@ class DashboardCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categories $categories)
+    public function edit(Categories $category)
     {
         //
+        if (auth()->user()->isAdmin === 1) {
+            return view('dashboard.categories.edit', [
+                "category" => $category
+            ]);
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $categories)
+    public function update(Request $request, Categories $category)
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            $rules = [
+                'kategori' => 'required|max:255',
+                // 'slug' => 'required|unique:categories'
+            ];
+            if ($request->slug != $category->slug) {
+                $rules['slug'] = 'required|unique:categories';
+            }
+
+            $validatedData = $request->validate($rules);
+            Categories::where('id', $category->id)
+                ->update($validatedData);
+            return redirect('/dashboard/categories')->with('success', 'Succesfully Updated');
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categories $categories)
+    public function destroy(Categories $category)
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            Categories::destroy($category->id);
+            return redirect('/dashboard/categories')->with('success', 'Succesfully Deleted');
+        } else {
+            return view('homepage');
+        }
+    }
+    public function checkSlug(Request $request)
+    {
+        if (auth()->user()->isAdmin === 1) {
+            $slug = SlugService::createSlug(Categories::class, 'slug', $request->kategori);
+            return response()->json(['slug' => $slug]);
+        } else {
+            return view('homepage');
+        }
     }
 }

@@ -167,11 +167,11 @@ unset($__errorArgs, $__bag); ?>
             <div class="mb-3">
                 <label for="vendors_id" class="form-label">Vendor</label>
                 <select class="form-select" name="vendors_id" required>
-                    <?php $__currentLoopData = $vendors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vendors): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if(old('vendors_id') == $vendors->id): ?>
-                            <option value="<?php echo e($vendors->id); ?>" selected><?php echo e($vendors->nama); ?></option>
+                    <?php $__currentLoopData = $vendors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vendor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if(old('vendors_id') == $vendor->id): ?>
+                            <option value="<?php echo e($vendor->id); ?>" selected><?php echo e($vendor->nama); ?></option>
                         <?php else: ?>
-                            <option value="<?php echo e($vendors->id); ?>"><?php echo e($vendors->nama); ?></option>
+                            <option value="<?php echo e($vendor->id); ?>"><?php echo e($vendor->nama); ?></option>
                         <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
