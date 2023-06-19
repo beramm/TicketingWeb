@@ -30,6 +30,13 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         
+        $hargaTotal = $request->input('totalHarga');
+        $jumlahBeli = $request->input('totalJumlahBeli');
+
+        return view('buy', [
+            'hargaTotal' => $hargaTotal,
+            'jumlahBeli' => $jumlahBeli,
+        ]);
     }
 
     /**
@@ -40,7 +47,6 @@ class PaymentController extends Controller
         $concert = Concerts::with('tickets')->findOrFail($concert_id);
 
         $tickets = $concert->tickets;
-
         return view('payment', [
             'tickets' => $tickets
         ]);
