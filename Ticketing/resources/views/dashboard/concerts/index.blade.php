@@ -17,9 +17,14 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Concerts</h1>
     </div>
+    @if (session()->has('success'))
+        <div class="alert alert-primary col-lg-8" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="table-responsive">
 
-        <div class="py-3 mt-4 px-3 text-center rounded"
+        <div class="py-3 mt-4 px-3 mb-3 text-center rounded"
             style="background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);">
             <a href="/dashboard/concerts/create">
                 <button type="button" class="btn btn-dark" style="width: 100%;">
@@ -43,23 +48,27 @@
                 @endphp
                 @foreach ($concerts as $concert)
                     <tr>
-                        <td>{{ ++$counter}}</td>
+                        <td>{{ ++$counter }}</td>
                         <td>{{ $concert->nama }}</td>
                         <td>{{ $concert->categories->kategori }}</td>
                         <td>
-                            <a href="/dashboard/concerts/{{ $concert->slug}}" class="badge bg-info">
+                            <a href="/dashboard/concerts/{{ $concert->slug }}" class="badge bg-info">
                                 <span data-feather="eye">
                                 </span>
                             </a>
 
-                            <a href="" class="badge bg-warning">
+                            <a href="/dashboard/concerts/{{ $concert->slug }}/edit" class="badge bg-warning">
                                 <span data-feather="edit">
                                 </span>
                             </a>
-                            <a href="" class="badge bg-danger">
-                                <span data-feather="x-circle">
-                                </span>
-                            </a>
+
+                            <form action="/dashboard/concerts/{{ $concert->slug }}" method="POST" class="d-inline">
+                                @method('delete')
+                                @csrf
+                                <button class="badge bg-danger border-0"
+                                    onclick="return confirm('Delete this Concert ?')"><span data-feather="x-circle">
+                                    </span></button>
+                            </form>
 
                         </td>
                     </tr>

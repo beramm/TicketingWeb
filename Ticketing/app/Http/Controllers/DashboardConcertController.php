@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Concerts;
+use App\Models\Vendors;
+use App\Models\Categories;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+
+use function GuzzleHttp\Promise\all;
 
 class DashboardConcertController extends Controller
 {
@@ -15,7 +20,7 @@ class DashboardConcertController extends Controller
         //
         if (auth()->user()->isAdmin === 1) {
             return view('dashboard.concerts.index', [
-                'concerts' => Concerts::paginate(15)->withQueryString()
+                'concerts' => Concerts::latest()->paginate(15)->withQueryString()
             ]);
         } else {
             return view('homepage');
@@ -28,7 +33,10 @@ class DashboardConcertController extends Controller
     public function create()
     {
         if (auth()->user()->isAdmin === 1) {
-            return view('dashboard.concerts.create');
+            return view('dashboard.concerts.create', [
+                'categories' => Categories::all(),
+                'vendors' => Vendors::all()
+            ]);
         } else {
             return view('homepage');
         }
@@ -40,6 +48,27 @@ class DashboardConcertController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
+        if (auth()->user()->isAdmin === 1) {
+            $validatedData = $request->validate([
+                'nama' => 'required|max:255',
+                'slug' => 'required|unique:concerts',
+                'tempat' => 'required',
+                'pict' => 'required',
+                'tanggal' => 'required',
+                'waktu' => 'required',
+                'harga' => 'required',
+                'categories_id' => 'required',
+                'vendors_id' => 'required',
+                'terms' => 'required'
+            ]);
+            // dd($validatedData);
+
+            Concerts::create($validatedData);
+            return redirect('/dashboard/concerts')->with('success', 'Succesfully Created');
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
@@ -60,24 +89,69 @@ class DashboardConcertController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Concerts $concerts)
+    public function edit(Concerts $concert)
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            return view('dashboard.concerts.edit', [
+                "concert" => $concert,
+                "categories" => Categories::all(),
+                "vendors" => Vendors::all()
+            ]);
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Concerts $concerts)
+    public function update(Request $request, Concerts $concert)
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            $rules = [
+                'nama' => 'required|max:255',
+                'tempat' => 'required',
+                'pict' => 'required',
+                'tanggal' => 'required',
+                'waktu' => 'required',
+                'harga' => 'required',
+                'categories_id' => 'required',
+                'vendors_id' => 'required',
+                'terms' => 'required'
+            ];
+            // dd($validatedData);
+
+            if ($request->slug != $concert->slug) {
+                $rules['slug'] = 'required|unique:concerts';
+            }
+            $validatedData = $request->validate($rules);
+            Concerts::where('id', $concert->id)
+                ->update($validatedData);
+            return redirect('/dashboard/concerts')->with('success', 'Succesfully Updated');
+        } else {
+            return view('homepage');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Concerts $concerts)
+    public function destroy(Concerts $concert)
     {
-        //
+        if (auth()->user()->isAdmin === 1) {
+            Concerts::destroy($concert->id);
+            return redirect('/dashboard/concerts')->with('success', 'Succesfully Deleted');
+        } else {
+            return view('homepage');
+        }
+    }
+    public function checkSlug(Request $request)
+    {
+        if (auth()->user()->isAdmin === 1) {
+            $slug = SlugService::createSlug(Concerts::class, 'slug', $request->nama);
+            return response()->json(['slug' => $slug]);
+        } else {
+            return view('homepage');
+        }
     }
 }

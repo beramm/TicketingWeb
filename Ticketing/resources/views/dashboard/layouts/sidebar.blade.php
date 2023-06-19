@@ -9,9 +9,22 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('dashboard/concerts') ? 'active' : '' }}" href="/dashboard/concerts">
+                <a class="nav-link {{ Request::is('dashboard/concerts*') ? 'active' : '' }}" href="/dashboard/concerts">
                     <span data-feather="file" class="align-text-bottom"></span>
                     Concerts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="/dashboard/categories">
+                    <span data-feather="list" class="align-text-bottom"></span>
+                    Categories
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('dashboard/vendors*') ? 'active' : '' }}" href="/dashboard/vendors">
+                    <span data-feather="award" class="align-text-bottom"></span>
+                    Vendors
                 </a>
             </li>
 

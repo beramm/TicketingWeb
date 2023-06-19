@@ -35,7 +35,7 @@
                                 <input class="form-control" type="number" id="quantity-input-{{ $ticket->id }}"
                                     value="0" oninput="updateLabel({{ $ticket->id }}, this.value)"
                                     data-index="{{ $index + 1}}" data-harga="{{ $ticket->harga }}"
-                                    name="total-input-venue[{{ $ticket->id }}]">
+                                    name="total-input-venue[{{ $ticket->id }}]" max="4">
                             @endif
                         </td>
                         <td>

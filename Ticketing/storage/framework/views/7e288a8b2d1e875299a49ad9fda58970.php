@@ -10,13 +10,20 @@
                     Back To Previous Page <span data-feather="arrow-left"></span>
                 </a>
 
-                <a href="" class="btn btn-warning">
-                    Edit <span data-feather="edit"></span>
+                <a href="/dashboard/concerts/<?php echo e($concert->slug); ?>/edit" class="btn btn-warning">
+                    Edit <span data-feather="edit">
+                    </span>
                 </a>
 
-                <a href="" class="btn btn-danger">
-                    Delete <span data-feather="x-circle"></span>
-                </a>
+                <form action="/dashboard/concerts/<?php echo e($concert->slug); ?>" method="POST" class="d-inline">
+                    <?php echo method_field('delete'); ?>
+                    <?php echo csrf_field(); ?>
+                    <button class="btn btn-danger border-0" onclick="return confirm('Delete this Concert ?')">
+                        Delete
+                        <span data-feather="x-circle">
+                        </span></button>
+                </form>
+
             </div>
         </div>
     </div>

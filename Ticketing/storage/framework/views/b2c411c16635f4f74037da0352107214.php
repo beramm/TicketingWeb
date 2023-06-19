@@ -27,10 +27,18 @@
             </div>
             <div class="py-3 px-3 mt-4 d-flex justify-content-center rounded"
                 style="background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);">
-                <a href="/concerts/buy/<?php echo e($concert->id); ?>">
-                    <button type="button" class="btn btn-dark " style="width: 100%;position: sticky; top: 0">Beli
-                        Tiket</button>
-                </a>
+                <?php if(auth()->guard()->check()): ?>
+                    <a href="/concerts/<?php echo e($concert->id); ?>/payment">
+                        <button type="button" class="btn btn-dark " style="width: 100%;position: sticky; top: 0">Beli
+                            Tiket</button>
+                    </a>
+                <?php endif; ?>
+                <?php if(auth()->guard()->guest()): ?>
+                    <a href="<?php echo e(route('login')); ?>">
+                        <button type="button" class="btn btn-dark " style="width: 100%;position: sticky; top: 0">Beli
+                            Tiket</button>
+                    </a>
+                <?php endif; ?>
             </div>
 
         </div>

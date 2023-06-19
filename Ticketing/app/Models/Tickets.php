@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Tickets extends Model
 {
     use HasFactory;
-    protected $table = 'tickets';
-    public function Concerts(){
-        return $this->belongsTo(Concerts::class);
+    // protected $table = 'tickets';
+    protected $guarded = ['id'];
+
+    public function Concerts()
+    {
+        return $this->belongsTo(Concerts::class, 'concerts_id');
     }
     public function Bought()
     {
