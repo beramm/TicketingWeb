@@ -15,20 +15,20 @@
         }
     </style>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Categories</h1>
+        <h1 class="h2">Concerts</h1>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-primary col-lg-8" role="alert">
             {{ session('success') }}
         </div>
     @endif
-    <div class="table-responsive col-lg-8">
+    <div class="table-responsive">
 
         <div class="py-3 mt-4 px-3 mb-3 text-center rounded"
             style="background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);">
-            <a href="/dashboard/categories/create">
+            <a href="/dashboard/concerts/create">
                 <button type="button" class="btn btn-dark" style="width: 100%;">
-                    Create New Category
+                    Create New Ticket-Batch
                 </button>
             </a>
         </div>
@@ -38,31 +38,25 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Tickets</th>
                 </tr>
             </thead>
             <tbody>
                 @php
-                    $counter = ($categories->currentPage() - 1) * $categories->perPage();
+                    $counter = ($concerts->currentPage() - 1) * $concerts->perPage();
                 @endphp
-                @foreach ($categories as $category)
+                @foreach ($concerts as $concert)
                     <tr>
                         <td>{{ ++$counter }}</td>
-                        <td>{{ $category->kategori }}</td>
+                        <td>{{ $concert->nama }}</td>
+                        <td>{{ $concert->categories->kategori }}</td>
                         <td>
-
-                            <a href="/dashboard/categories/{{ $category->slug }}/edit" class="badge bg-warning">
-                                <span data-feather="edit">
+                            
+                            <a href="dashboard/tickets" class="badge bg-warning">
+                                <span data-feather="file-plus">
                                 </span>
                             </a>
-
-                            <form action="/dashboard/categories/{{ $category->slug }}" method="POST" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button class="badge bg-danger border-0"
-                                    onclick="return confirm('Delete this Category ?')"><span data-feather="x-circle">
-                                    </span></button>
-                            </form>
 
                         </td>
                     </tr>
@@ -71,6 +65,6 @@
         </table>
     </div>
     <div class="d-flex justify-content-center">
-        {{ $categories->links() }}
+        {{ $concerts->links() }}
     </div>
 @endsection

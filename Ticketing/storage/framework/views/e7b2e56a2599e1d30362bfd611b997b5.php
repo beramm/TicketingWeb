@@ -8,14 +8,10 @@
                     Dashboard
                 </a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link <?php echo e(Request::is('dashboard/concerts*') ? 'active' : ''); ?>" href="/dashboard/concerts">
-                    <span data-feather="file" class="align-text-bottom"></span>
-                    Concerts
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php echo e(Request::is('dashboard/categories*') ? 'active' : ''); ?>" href="/dashboard/categories">
+                <a class="nav-link <?php echo e(Request::is('dashboard/categories*') ? 'active' : ''); ?>"
+                    href="/dashboard/categories">
                     <span data-feather="list" class="align-text-bottom"></span>
                     Categories
                 </a>
@@ -27,7 +23,19 @@
                     Vendors
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link <?php echo e(Request::is('dashboard/concerts*') ? 'active' : ''); ?>" href="/dashboard/concerts">
+                    <span data-feather="file" class="align-text-bottom"></span>
+                    Concerts
+                </a>
+            </li>
+            <li class="nav-item">
+                
+                <a class="nav-link <?php echo e(Request::is('dashboard/tickets*') ? 'active' : ''); ?>" href="/dashboard/tickets">
+                    <span data-feather="plus-square" class="align-text-bottom"></span>
+                    Tickets
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

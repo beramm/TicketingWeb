@@ -3,7 +3,7 @@
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardVendorController;
 use Carbon\Carbon;
-use App\Models\Concert;
+use App\Models\Concerts;
 use App\Models\Categories;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +12,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConcertController;
 use App\Http\Controllers\DashboardConcertController;
+use App\Http\Controllers\DashboardTicketController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PaymentController;
@@ -76,6 +77,15 @@ Route::get('/dashboard', function () {
     }
 })->middleware('auth');
 
+Route::get('dashboard/concertTicket', function () {
+    if (auth()->user()->isAdmin === 1) {
+        return view('dashboard.tickets.temp',[
+            'concerts'=> Concerts::latest()->paginate(15)->withQueryString()
+        ]);
+    } else {
+        return redirect('/'); // Redirect to another route if not an admin
+    }
+})->middleware('auth');
 
 Route::get('/dashboard/concerts/checkSlug', [DashboardConcertController::class, "checkSlug"])->middleware('auth');
 
@@ -86,3 +96,5 @@ Route::resource('/dashboard/concerts', DashboardConcertController::class)->middl
 Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth');
 
 Route::resource('/dashboard/vendors', DashboardVendorController::class)->middleware('auth');
+
+Route::resource('/dashboard/tickets',DashboardTicketController::class)->middleware('auth');
