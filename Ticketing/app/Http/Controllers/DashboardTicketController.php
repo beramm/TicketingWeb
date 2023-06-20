@@ -18,7 +18,11 @@ class DashboardTicketController extends Controller
                 'tickets' => Tickets::latest()->paginate(15)->withQueryString()
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -32,7 +36,11 @@ class DashboardTicketController extends Controller
                 'concerts' => Concerts::all()
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -52,7 +60,11 @@ class DashboardTicketController extends Controller
             Tickets::create($validatedData);
             return redirect('/dashboard/tickets')->with('success', 'Succesfully Created');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -75,7 +87,11 @@ class DashboardTicketController extends Controller
                 "ticket" => $ticket
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -96,7 +112,11 @@ class DashboardTicketController extends Controller
                 ->update($validatedData);
             return redirect('/dashboard/tickets')->with('success', 'Succesfully Updated');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -109,7 +129,11 @@ class DashboardTicketController extends Controller
             Tickets::destroy($ticket->id);
             return redirect('/dashboard/tickets')->with('success', 'Succesfully Deleted');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 }

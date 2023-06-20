@@ -68,16 +68,17 @@
                                 Personal
                             </a>
                             <ul class="dropdown-menu dropdown-hover" data-bs-auto-close="false">
-                                <li class="text-dark"><a class="dropdown-item" href="{{ route('login') }}"><i
-                                            class="bi bi-person-circle"></i> Profile
-                                    </a>
-                                </li>
+
                                 @if (auth()->user()->isAdmin === 1)
                                     <li class="text-dark"><a class="dropdown-item" href="/dashboard"><i
                                                 class="bi bi-layout-text-sidebar"></i> Dashboard
                                         </a>
                                     </li>
                                 @else
+                                    <li class="text-dark"><a class="dropdown-item" href="/profile"><i
+                                                class="bi bi-person-circle"></i> Profile
+                                        </a>
+                                    </li>
                                     <li class="text-dark"><a class="dropdown-item" href="/ordered"><i
                                                 class="bi bi-ticket-detailed-fill"></i></i> Ticket Ordered
                                         </a>

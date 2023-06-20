@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vendors;
+use App\Models\Concerts;
 use Illuminate\Http\Request;
 
 class DashboardVendorController extends Controller
@@ -17,7 +18,11 @@ class DashboardVendorController extends Controller
                 'vendors' => Vendors::latest()->paginate(15)->withQueryString()
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -29,7 +34,11 @@ class DashboardVendorController extends Controller
         if (auth()->user()->isAdmin === 1) {
             return view('dashboard.vendors.create');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -45,7 +54,11 @@ class DashboardVendorController extends Controller
             Vendors::create($validatedData);
             return redirect('/dashboard/vendors')->with('success', 'Succesfully Created');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -67,7 +80,11 @@ class DashboardVendorController extends Controller
                 "vendor" => $vendor
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -84,7 +101,11 @@ class DashboardVendorController extends Controller
                 ->update($validatedData);
             return redirect('/dashboard/vendors')->with('success', 'Succesfully Updated');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -97,7 +118,11 @@ class DashboardVendorController extends Controller
             Vendors::destroy($vendor->id);
             return redirect('/dashboard/vendors')->with('success', 'Succesfully Deleted');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 }

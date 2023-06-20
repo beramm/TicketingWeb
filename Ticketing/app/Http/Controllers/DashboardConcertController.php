@@ -24,7 +24,11 @@ class DashboardConcertController extends Controller
                 'concerts' => Concerts::latest()->paginate(15)->withQueryString()
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -39,7 +43,11 @@ class DashboardConcertController extends Controller
                 'vendors' => Vendors::all()
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -69,7 +77,11 @@ class DashboardConcertController extends Controller
             Concerts::create($validatedData);
             return redirect('/dashboard/concerts')->with('success', 'Succesfully Created');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -84,7 +96,11 @@ class DashboardConcertController extends Controller
                 "concert" => $concert
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -100,7 +116,11 @@ class DashboardConcertController extends Controller
                 "vendors" => Vendors::all()
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -136,7 +156,11 @@ class DashboardConcertController extends Controller
                 ->update($validatedData);
             return redirect('/dashboard/concerts')->with('success', 'Succesfully Updated');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -149,7 +173,11 @@ class DashboardConcertController extends Controller
             Concerts::destroy($concert->id);
             return redirect('/dashboard/concerts')->with('success', 'Succesfully Deleted');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
     public function checkSlug(Request $request)
@@ -158,7 +186,11 @@ class DashboardConcertController extends Controller
             $slug = SlugService::createSlug(Concerts::class, 'slug', $request->nama);
             return response()->json(['slug' => $slug]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 }

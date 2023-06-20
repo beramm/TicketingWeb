@@ -16,6 +16,9 @@ use App\Http\Controllers\DashboardTicketController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileVisitorController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,10 +80,14 @@ Route::get('/dashboard', function () {
     }
 })->middleware('auth');
 
+Route::get('/profile', function () {
+    return view('profile.index');
+});
+
 Route::get('dashboard/concertTicket', function () {
     if (auth()->user()->isAdmin === 1) {
-        return view('dashboard.tickets.temp',[
-            'concerts'=> Concerts::latest()->paginate(15)->withQueryString()
+        return view('dashboard.tickets.temp', [
+            'concerts' => Concerts::latest()->paginate(15)->withQueryString()
         ]);
     } else {
         return redirect('/'); // Redirect to another route if not an admin
@@ -97,4 +104,14 @@ Route::resource('/dashboard/categories', DashboardCategoryController::class)->mi
 
 Route::resource('/dashboard/vendors', DashboardVendorController::class)->middleware('auth');
 
-Route::resource('/dashboard/tickets',DashboardTicketController::class)->middleware('auth');
+Route::resource('/dashboard/tickets', DashboardTicketController::class)->middleware('auth');
+
+Route::resource('/profile/visitors', ProfileVisitorController::class)->middleware('auth');
+
+Route::get('/profile/data', function () {
+    return view('profile.data.index', [
+        "user" => auth()->user()
+    ]);
+})->middleware('auth');
+
+Route::post('/profile/{User:id}', [ProfileController::class, 'update'])->middleware('auth');

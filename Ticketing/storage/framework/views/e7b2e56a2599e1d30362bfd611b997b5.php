@@ -3,7 +3,7 @@
         <ul class="nav flex-column">
             <li class="nav-item">
 
-                <a class="nav-link <?php echo e(Request::is('dashboard') ? 'active' : ''); ?>" aria-current="page" href="#">
+                <a class="nav-link <?php echo e(Request::is('dashboard') ? 'active' : ''); ?>" aria-current="page" href="/dashboard">
                     <span data-feather="home" class="align-text-bottom"></span>
                     Dashboard
                 </a>

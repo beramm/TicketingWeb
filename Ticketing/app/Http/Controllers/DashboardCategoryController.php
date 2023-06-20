@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Concerts;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -18,7 +19,11 @@ class DashboardCategoryController extends Controller
                 'categories' => Categories::latest()->paginate(15)->withQueryString()
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -30,7 +35,11 @@ class DashboardCategoryController extends Controller
         if (auth()->user()->isAdmin === 1) {
             return view('dashboard.categories.create');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -47,7 +56,11 @@ class DashboardCategoryController extends Controller
             Categories::create($validatedData);
             return redirect('/dashboard/categories')->with('success', 'Succesfully Created');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -70,7 +83,11 @@ class DashboardCategoryController extends Controller
                 "category" => $category
             ]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -93,7 +110,11 @@ class DashboardCategoryController extends Controller
                 ->update($validatedData);
             return redirect('/dashboard/categories')->with('success', 'Succesfully Updated');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 
@@ -106,7 +127,11 @@ class DashboardCategoryController extends Controller
             Categories::destroy($category->id);
             return redirect('/dashboard/categories')->with('success', 'Succesfully Deleted');
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
     public function checkSlug(Request $request)
@@ -115,7 +140,11 @@ class DashboardCategoryController extends Controller
             $slug = SlugService::createSlug(Categories::class, 'slug', $request->kategori);
             return response()->json(['slug' => $slug]);
         } else {
-            return view('homepage');
+            return view('homepage', [
+                "title" => '',
+                "concerts" => Concerts::latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString()
+
+            ]);
         }
     }
 }
