@@ -1,7 +1,7 @@
 <?php $__env->startSection('container'); ?>
     <div class="row pb-5 mb-4">
         <div class="col-md-8">
-            <img src="/img/<?php echo e($concert->pict); ?>" class="img-fluid rounded" alt="Image"
+            <img src="<?php echo e(asset('storage/' . $concert->pict)); ?>" class="img-fluid rounded" alt="Image"
                 style="height: 270px;width: 850px;object-fit: cover">
         </div>
         <div class="col-md-4">

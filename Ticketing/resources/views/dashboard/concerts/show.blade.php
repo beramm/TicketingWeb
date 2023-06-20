@@ -30,9 +30,10 @@
     <div class="row pb-5 mb-4">
 
         <div class="col-md-8">
-            <img src="/img/{{ $concert->pict }}" class="img-fluid rounded" alt="Image"
+            <img src="{{ asset('storage/' . $concert->pict) }}" class="img-fluid rounded" alt="Image"
                 style="height: 270px;width: 850px;object-fit: cover">
         </div>
+
         <div class="col-md-4">
             <div class="card" style="width: 100%;background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); ">
                 <div class="card-body">

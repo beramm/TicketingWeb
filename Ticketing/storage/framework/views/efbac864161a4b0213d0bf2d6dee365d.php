@@ -10,7 +10,7 @@
         <h1 class="h2">Edit Concert</h1>
     </div>
     <div class="col-lg-8 mb-5">
-        <form method="POST" action="/dashboard/concerts/<?php echo e($concert->slug); ?>">
+        <form method="POST" action="/dashboard/concerts/<?php echo e($concert->slug); ?>" enctype="multipart/form-data">
             <?php echo method_field('put'); ?>
             <?php echo csrf_field(); ?>
             <div class="mb-3">
@@ -46,7 +46,34 @@ unset($__errorArgs, $__bag); ?>
 
             </div>
 
-            <input type="hidden" value="bruno3.jpg" name="pict">
+            <div class="mb-3">
+                <label for="pict" class="form-label">Picture</label>
+                <input type="hidden" name="oldPict" value="<?php echo e($concert->pict); ?>">
+
+                <input class="form-control <?php $__errorArgs = ['pict'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" type="file" id="pict" name="pict"
+                    onchange="previewImage()">
+                <img class="preview img-fluid mt-3 mb-3 col-sm-5" src="<?php echo e(asset('storage/' . $concert->pict)); ?>">
+                <?php $__errorArgs = ['pict'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <div class="invalid-feedback">
+                        <?php echo e($message); ?>
+
+                    </div>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
 
             <div class="mb-3">
                 <label for="tempat">Tempat</label>
@@ -226,6 +253,20 @@ unset($__errorArgs, $__bag); ?>
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault()
         });
+
+        function previewImage() {
+            const pict = document.querySelector('#pict');
+            const preview = document.querySelector('.preview');
+
+            preview.style.display = 'block';
+            const oFReader = new FileReader();
+
+            oFReader.readAsDataURL(pict.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                preview.src = oFREvent.target.result;
+            }
+        }
     </script>
 <?php $__env->stopSection(); ?>
 

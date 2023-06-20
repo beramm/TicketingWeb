@@ -23,7 +23,7 @@
 
         </div>
     <?php endif; ?>
-    <div class="table-responsive">
+    <div class="table-responsive col-lg-8">
 
         <div class="py-3 mt-4 px-3 mb-3 text-center rounded"
             style="background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);">

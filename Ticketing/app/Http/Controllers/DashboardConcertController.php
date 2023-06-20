@@ -7,6 +7,7 @@ use App\Models\Vendors;
 use App\Models\Categories;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use function GuzzleHttp\Promise\all;
 
@@ -54,7 +55,7 @@ class DashboardConcertController extends Controller
                 'nama' => 'required|max:255',
                 'slug' => 'required|unique:concerts',
                 'tempat' => 'required',
-                'pict' => 'required',
+                'pict' => 'required|image|file|max:10000',
                 'tanggal' => 'required',
                 'waktu' => 'required',
                 'harga' => 'required',
@@ -62,6 +63,7 @@ class DashboardConcertController extends Controller
                 'vendors_id' => 'required',
                 'terms' => 'required'
             ]);
+            $validatedData['pict'] = $request->file('pict')->store('concert-picts');
             // dd($validatedData);
 
             Concerts::create($validatedData);
@@ -111,7 +113,7 @@ class DashboardConcertController extends Controller
             $rules = [
                 'nama' => 'required|max:255',
                 'tempat' => 'required',
-                'pict' => 'required',
+                'pict' => 'required|image|file|max:10000',
                 'tanggal' => 'required',
                 'waktu' => 'required',
                 'harga' => 'required',
@@ -124,7 +126,12 @@ class DashboardConcertController extends Controller
             if ($request->slug != $concert->slug) {
                 $rules['slug'] = 'required|unique:concerts';
             }
+
             $validatedData = $request->validate($rules);
+
+            Storage::delete($request->oldPict);
+            $validatedData['pict'] = $request->file('pict')->store('concert-picts');
+
             Concerts::where('id', $concert->id)
                 ->update($validatedData);
             return redirect('/dashboard/concerts')->with('success', 'Succesfully Updated');

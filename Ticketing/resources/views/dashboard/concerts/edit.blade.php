@@ -10,7 +10,7 @@
         <h1 class="h2">Edit Concert</h1>
     </div>
     <div class="col-lg-8 mb-5">
-        <form method="POST" action="/dashboard/concerts/{{ $concert->slug }}">
+        <form method="POST" action="/dashboard/concerts/{{ $concert->slug }}" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-3">
@@ -31,7 +31,19 @@
 
             </div>
 
-            <input type="hidden" value="bruno3.jpg" name="pict">
+            <div class="mb-3">
+                <label for="pict" class="form-label">Picture</label>
+                <input type="hidden" name="oldPict" value="{{ $concert->pict }}">
+
+                <input class="form-control @error('pict') is-invalid @enderror" type="file" id="pict" name="pict"
+                    onchange="previewImage()">
+                <img class="preview img-fluid mt-3 mb-3 col-sm-5" src="{{ asset('storage/' . $concert->pict) }}">
+                @error('pict')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
             <div class="mb-3">
                 <label for="tempat">Tempat</label>
@@ -136,5 +148,19 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault()
         });
+
+        function previewImage() {
+            const pict = document.querySelector('#pict');
+            const preview = document.querySelector('.preview');
+
+            preview.style.display = 'block';
+            const oFReader = new FileReader();
+
+            oFReader.readAsDataURL(pict.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                preview.src = oFREvent.target.result;
+            }
+        }
     </script>
 @endsection
