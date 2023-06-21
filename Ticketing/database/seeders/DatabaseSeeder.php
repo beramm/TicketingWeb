@@ -24,8 +24,9 @@ class DatabaseSeeder extends Seeder
         Categories::factory()->times(7)->create();
         Concerts::factory()->times(20)->create();
         Tickets::factory()->times(100)->create();
-        Bought::factory()->times(100)->create();
         Visitors::factory()->times(50)->create();
+        Bought::factory()->times(100)->create();
+        
         
 /*         \App\Models\User::factory(10)->create();
 

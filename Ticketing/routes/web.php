@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/concerts/{concert}/payment', [PaymentController::class, 'show']);
     Route::post('/postPayment', [PaymentController::class, 'store'])->name('postPayment');
     Route::post('/postPayment/buyed', [PaymentController::class, 'create'])->name('postPayment/buyed');
+    Route::get('/done', [PaymentController::class, 'done'])->name('done');
 });
 
 Route::middleware(['guest'])->group(function () {

@@ -14,4 +14,8 @@ class Visitors extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function Bought()
+    {
+        return $this->hasMany(Bought::class);
+    }
 }

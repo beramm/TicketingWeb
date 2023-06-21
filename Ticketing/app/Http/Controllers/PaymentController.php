@@ -26,46 +26,129 @@ class PaymentController extends Controller
      */
     public function create(Request $request)
     {
-        $array = $request->input('totalArray');
-        $array = ltrim($array, ',');
-        $idTicket = explode(',', $array);
-        $tickets = Tickets::findOrFail($idTicket);
         $jumlahBeli = $request->input('jumlahBeli');
         $hargaTotal = $request->input('hargaTotal');
+        $totalJumlah = $request->input('totalJumlah');
 
+        $totalJumlah = ltrim($totalJumlah, ',');
+        $jumlahData = explode(',', $totalJumlah);
+        $jumlahData = array_filter($jumlahData, function ($value) {
+            return $value !== null && $value !== '';
+        });
+
+        $totalId = $request->input('totalId');
+        $totalId = ltrim($totalId, ',');
+        $idTicket = explode(',', $totalId);
+        $idTicket = array_filter($idTicket, function ($value) {
+            return $value !== null && $value !== '';
+        });
+
+        $tickets = Tickets::findOrFail($idTicket);
+
+        $idVisitor = $request->input('idVisitor');
+        $visitors = Visitors::findOrFail($idVisitor);
+
+        $user = User::find(auth()->id());
+
+        $validatedData = [];
+        
+        foreach ($idTicket as $index => $ticketId) {
+            $data = [
+                'users_id' => $user->id,
+                'tickets_id' => $ticketId,
+                'visitors_id' => $visitors->id,
+                'jumlah' => $jumlahData[$index],
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ];
+
+            $rules = [
+                'tickets_id' => 'required',
+                'visitors_id' => 'required',
+                'jumlah' => 'required',
+            ];
+
+            $validator = Validator::make($data, $rules);
+            
+            if ($validator->fails()) {
+            } else {
+                $validatedData[] = $data;
+            }
+        }
+        $insertedIds = [];
+        if (!empty($validatedData)) {
+            foreach ($validatedData as $data) {
+                $bought = Bought::create($data);
+                $insertedIds[] = $bought->id;
+            }
+            
+            session()->flash('success', 'Successfully added');
+        }
+
+        $bought = Bought::findOrFail($insertedIds);
+        
         if (!is_null($request->input('nama'))) {
             $nama = $request->input('nama');
             $nik = $request->input('nik');
             $telepon = $request->input('telepon');
             $kelahiran = $request->input('kelahiran');
-
-            return view('done', [
+            return redirect()->route('done')->with([
                 'nama' => $nama,
                 'nik' => $nik,
                 'telepon' => $telepon,
                 'kelahiran' => $kelahiran,
                 'tickets' => $tickets,
                 'jumlahBeli' => $jumlahBeli,
-                'hargaTotal' => $hargaTotal
+                'hargaTotal' => $hargaTotal,
+                'visitors' => $visitors,
+                'users' => $user,
+                'bought' => $bought
             ]);
         } else {
-            $id = $request->input('idVisitor');
-            $visitors = Visitors::findOrFail($id);
             $nama = $visitors->nama;
             $nik = $visitors->nik;
             $telepon = $visitors->telepon;
             $kelahiran = $visitors->kelahiran;
-
-            return view('done', [
+            
+            return redirect()->route('done')->with([
                 'nama' => $nama,
                 'nik' => $nik,
                 'telepon' => $telepon,
                 'kelahiran' => $kelahiran,
                 'tickets' => $tickets,
                 'jumlahBeli' => $jumlahBeli,
-                'hargaTotal' => $hargaTotal
+                'hargaTotal' => $hargaTotal,
+                'visitors' => $visitors,
+                'users' => $user,
+                'bought' => $bought
             ]);
         }
+    }
+
+    public function done(Request $request)
+    {
+        $nama = $request->session()->get('nama');
+        $nik = $request->session()->get('nik');
+        $telepon = $request->session()->get('telepon');
+        $kelahiran = $request->session()->get('kelahiran');
+        $tickets = $request->session()->get('tickets');
+        $jumlahBeli = $request->session()->get('jumlahBeli');
+        $hargaTotal = $request->session()->get('hargaTotal');
+        $visitors = $request->session()->get('visitors');
+        $users = $request->session()->get('users');
+        $bought = $request->session()->get('bought');
+        return view('buyed', [
+            'nama' => $nama,
+            'nik' => $nik,
+            'telepon' => $telepon,
+            'kelahiran' => $kelahiran,
+            'tickets' => $tickets,
+            'jumlahBeli' => $jumlahBeli,
+            'hargaTotal' => $hargaTotal,
+            'visitors' => $visitors,
+            'users' => $users,
+            'bought' => $bought
+        ]);
     }
 
 
@@ -77,63 +160,16 @@ class PaymentController extends Controller
         $hargaTotal = $request->input('totalHarga');
         $jumlahBeli = $request->input('totalJumlahBeli');
         $barangVenue = $request->input('totalVenue');
-        
-
         $totalJumlah = $request->input('totalJumlah');
-        $totalJumlah = ltrim($totalJumlah, ',');
-        $jumlahData = explode(',', $totalJumlah);
-        $jumlahData = array_filter($jumlahData, function($value) {
-            return $value !== null && $value !== '';
-        });
-        
         $totalId = $request->input('totalId');
-        $totalId = ltrim($totalId, ',');
-        $idTicket = explode(',', $totalId);
-        $idTicket = array_filter($idTicket, function($value){
-            return $value !== null && $value !== '';
-        });
-        
         $user = User::find(auth()->id());
-        
-        $validatedData = [];
-        
-        foreach ($idTicket as $index => $ticketId) {
-            $data = [
-                'users_id' => $user->id,
-                'tickets_id' => $ticketId,
-                'jumlah' => $jumlahData[$index],
-                "created_at" =>  \Carbon\Carbon::now(),
-                "updated_at" => \Carbon\Carbon::now(),
-            ];
-        
-            $rules = [
-                'tickets_id' => 'required',
-                'jumlah' => 'required',
-            ];
-        
-            $validator = Validator::make($data, $rules);
-        
-            if ($validator->fails()) {
-                // Handle validation failure for the current item
-                // For example, you can log errors or take appropriate action
-            } else {
-                $validatedData[] = $data;
-            }
-        }
-        
-        if (!empty($validatedData)) {
-            Bought::insert($validatedData);
-            session()->flash('success', 'Successfully added');
-        }
-        
-
-        $totalId = $request->input('totalId');
 
         return view('buy', [
             'hargaTotal' => $hargaTotal,
             'jumlahBeli' => $jumlahBeli,
             'barangVenue' => $barangVenue,
             'totalId' => $totalId,
+            'totalJumlah' => $totalJumlah,
             'user' => $user,
         ]);
     }

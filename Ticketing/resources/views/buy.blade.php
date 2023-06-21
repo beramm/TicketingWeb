@@ -2,27 +2,11 @@
 
 @section('container')
     <form action="{{ route('postPayment/buyed') }}" method="POST" id="myForm">
-        <p>Total Jumlah Beli : {{ $jumlahBeli }}</p>
         <input type="hidden" value="{{ $jumlahBeli }}" name="jumlahBeli">
-        <div>Total Harga: Rp.{{ $hargaTotal }}</div>
         <input type="hidden" value="{{ $hargaTotal }}" name="hargaTotal">
-
-        @php
-            $barangArray = explode(',', $barangVenue);
-            $totalArray = explode(',', $totalId);
-        @endphp
         <input type="hidden" value="{{ $barangVenue }}" name="barangVenue">
-        <input type="hidden" value="{{$totalId}}" name="totalArray">
-        @foreach ($totalArray as $item)
-            @if ($item !== '')
-                <li>{{ $item }}</li>
-            @endif
-        @endforeach
-        @foreach ($barangArray as $item)
-            @if ($item !== '')
-                <li>{{ $item }}</li>
-            @endif
-        @endforeach
+        <input type="hidden" value="{{ $totalId }}" name="totalId">
+        <input type="hidden" value="{{ $totalJumlah }}" name="totalJumlah">
         <h1>Simpan data Pengunjung</h1>
         <p>Untuk dipilih saat memesan nanti supaya proses pemesananmu jadi lebih cepat dan simpel.</p>
 
@@ -83,5 +67,6 @@
                 }
             });
         </script>
+        @csrf
     </form>
 @endsection

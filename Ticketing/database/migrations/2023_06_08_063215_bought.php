@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id');
             $table->foreignId('tickets_id');
+            $table->foreignId('visitors_id');
             $table->integer('jumlah');
             $table->timestamps();
         });

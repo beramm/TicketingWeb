@@ -13,13 +13,17 @@ class Bought extends Model
     public function User(){
         return $this->belongsTo(User::class);
     }
-    public function Categories(){
+    public function Tickets(){
         return $this->belongsTo(Tickets::class);
+    }
+    public function Visitors(){
+        return $this->belongsTo(Visitors::class);
     }
 
     protected $fillable = [
         'users_id',
         'tickets_id',
+        'visitors_id',
         'jumlah'
     ];
 }

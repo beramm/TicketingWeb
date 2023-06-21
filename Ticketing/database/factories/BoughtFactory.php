@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Tickets;
 use App\Models\User;
+use App\Models\Visitors;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class BoughtFactory extends Factory
         return [
             'users_id' => User::inRandomOrder()->first()->id,
             'tickets_id' => Tickets::inRandomOrder()->first()->id,
+            'visitors_id' => Visitors::inRandomOrder()->first()->id,
             'jumlah' => fake()->numberBetween(1,10),
         ];
     }
