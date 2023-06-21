@@ -29,13 +29,15 @@
                         <td>
                             @if ($ticket->kuantitas === 0)
                                 <fieldset disabled>
-                                    <input type="text" class="form-control" value="0" readonly name="totalInput{{$ticket->id}}">
+                                    <input type="text" class="form-control" value="0" readonly
+                                        name="totalInput{{ $ticket->id }}">
                                 </fieldset>
                             @else
                                 <input class="form-control" type="number" id="quantity-input-{{ $ticket->id }}"
                                     value="0" oninput="updateLabel({{ $ticket->id }}, this.value)"
-                                    data-index="{{ $index + 1}}" data-harga="{{ $ticket->harga }}"
-                                    name="total-input-venue[{{ $ticket->id }}]" max="4">
+                                    data-index="{{ $index + 1 }}" data-harga="{{ $ticket->harga }}"
+                                    data-venue="{{ $ticket->venue }}" name="total-input-venue[{{ $ticket->id }}]"
+                                    max="4">
                             @endif
                         </td>
                         <td>
@@ -47,6 +49,8 @@
         </table>
         <input type="hidden" id="valueHarga" name="totalHarga" value="abcd">
         <input type="hidden" id="valueBeli" name="totalJumlahBeli">
+        <input type="hidden" id="valueVenue" name="totalVenue">
+        <input type="hidden" id="valueId" name="totalId">
         <button type="submit" class="btn btn-primary">Accept</button>
         <div id="status"></div>
         @csrf
@@ -55,11 +59,14 @@
     <script>
         var myArray = [];
         var hargaValue = [];
+        var totalVenue = [];
+        var totalId = [];
 
         function updateLabel(id, value) {
             var output = document.getElementById("demo-" + id);
             var harga = document.getElementById("quantity-input-" + id).dataset.harga;
             var index = document.getElementById("quantity-input-" + id).dataset.index;
+            var venue = document.getElementById("quantity-input-"+id).dataset.venue;
 
             if (value === "0" || value === "") {
                 output.textContent = "Rp.0";
@@ -68,13 +75,17 @@
                 output.textContent = "Rp." + total.toLocaleString();
             }
             hargaValue[index] = total;
-            myArray[index] = value;        
+            myArray[index] = value;
+            totalVenue[index] = venue;
+            totalId[index] = id;
         }
 
         document.getElementById('myForm').addEventListener('submit', function(event) {
             var form = event.target;
             var outputHarga = document.getElementById("valueHarga");
             var outputBeli = document.getElementById("valueBeli");
+            var outputVenue = document.getElementById("valueVenue");
+            var outputId = document.getElementById("valueId");
             var staus = document.getElementById("status");
             var sum = 0;
             var sumHarga = 0;
@@ -93,9 +104,9 @@
             } else {
                 outputHarga.value = sumHarga;
                 outputBeli.value = sum;
+                outputVenue.value = totalVenue;
+                outputId.value = totalId;
             }
         });
-
-
     </script>
 @endsection
