@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bought;
 use App\Models\Concerts;
 use App\Models\Tickets;
 use App\Models\User;
 use App\Models\Visitors;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class PaymentController extends Controller
 {
@@ -29,11 +32,13 @@ class PaymentController extends Controller
         $tickets = Tickets::findOrFail($idTicket);
         $jumlahBeli = $request->input('jumlahBeli');
         $hargaTotal = $request->input('hargaTotal');
+
         if (!is_null($request->input('nama'))) {
             $nama = $request->input('nama');
             $nik = $request->input('nik');
             $telepon = $request->input('telepon');
             $kelahiran = $request->input('kelahiran');
+
             return view('done', [
                 'nama' => $nama,
                 'nik' => $nik,
@@ -72,8 +77,57 @@ class PaymentController extends Controller
         $hargaTotal = $request->input('totalHarga');
         $jumlahBeli = $request->input('totalJumlahBeli');
         $barangVenue = $request->input('totalVenue');
+        
+
+        $totalJumlah = $request->input('totalJumlah');
+        $totalJumlah = ltrim($totalJumlah, ',');
+        $jumlahData = explode(',', $totalJumlah);
+        $jumlahData = array_filter($jumlahData, function($value) {
+            return $value !== null && $value !== '';
+        });
+        
         $totalId = $request->input('totalId');
+        $totalId = ltrim($totalId, ',');
+        $idTicket = explode(',', $totalId);
+        $idTicket = array_filter($idTicket, function($value){
+            return $value !== null && $value !== '';
+        });
+        
         $user = User::find(auth()->id());
+        
+        $validatedData = [];
+        
+        foreach ($idTicket as $index => $ticketId) {
+            $data = [
+                'users_id' => $user->id,
+                'tickets_id' => $ticketId,
+                'jumlah' => $jumlahData[$index],
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ];
+        
+            $rules = [
+                'tickets_id' => 'required',
+                'jumlah' => 'required',
+            ];
+        
+            $validator = Validator::make($data, $rules);
+        
+            if ($validator->fails()) {
+                // Handle validation failure for the current item
+                // For example, you can log errors or take appropriate action
+            } else {
+                $validatedData[] = $data;
+            }
+        }
+        
+        if (!empty($validatedData)) {
+            Bought::insert($validatedData);
+            session()->flash('success', 'Successfully added');
+        }
+        
+
+        $totalId = $request->input('totalId');
 
         return view('buy', [
             'hargaTotal' => $hargaTotal,

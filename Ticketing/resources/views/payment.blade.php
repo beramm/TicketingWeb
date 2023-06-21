@@ -47,10 +47,11 @@
                 @endforeach
             </tbody>
         </table>
-        <input type="hidden" id="valueHarga" name="totalHarga" value="abcd">
+        <input type="hidden" id="valueHarga" name="totalHarga">
         <input type="hidden" id="valueBeli" name="totalJumlahBeli">
         <input type="hidden" id="valueVenue" name="totalVenue">
         <input type="hidden" id="valueId" name="totalId">
+        <input type="hidden" id="valueJumlah" name="totalJumlah">
         <button type="submit" class="btn btn-primary">Accept</button>
         <div id="status"></div>
         @csrf
@@ -66,7 +67,7 @@
             var output = document.getElementById("demo-" + id);
             var harga = document.getElementById("quantity-input-" + id).dataset.harga;
             var index = document.getElementById("quantity-input-" + id).dataset.index;
-            var venue = document.getElementById("quantity-input-"+id).dataset.venue;
+            var venue = document.getElementById("quantity-input-" + id).dataset.venue;
 
             if (value === "0" || value === "") {
                 output.textContent = "Rp.0";
@@ -86,6 +87,7 @@
             var outputBeli = document.getElementById("valueBeli");
             var outputVenue = document.getElementById("valueVenue");
             var outputId = document.getElementById("valueId");
+            var outputJumlah = document.getElementById("valueJumlah");
             var staus = document.getElementById("status");
             var sum = 0;
             var sumHarga = 0;
@@ -101,11 +103,16 @@
                 staus.textContent = "Can't be higher than 4";
                 outputBeli.value = "";
                 event.preventDefault();
-            } else {
+            } if(sum <= 0){
+                staus.textContent = "Need More than 0";
+                outputBeli.value ="";
+                event.preventDefault()
+            }else {
                 outputHarga.value = sumHarga;
                 outputBeli.value = sum;
                 outputVenue.value = totalVenue;
                 outputId.value = totalId;
+                outputJumlah.value = myArray;
             }
         });
     </script>
