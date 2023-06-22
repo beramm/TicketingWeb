@@ -164,7 +164,7 @@ class PaymentController extends Controller
         $totalId = $request->input('totalId');
         $user = User::find(auth()->id());
 
-        return view('buy', [
+        return view('buy1', [
             'hargaTotal' => $hargaTotal,
             'jumlahBeli' => $jumlahBeli,
             'barangVenue' => $barangVenue,

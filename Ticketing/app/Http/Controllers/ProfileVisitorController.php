@@ -78,7 +78,7 @@ class ProfileVisitorController extends Controller
 
         Visitors::where('id', $visitor->id)
             ->update($validatedData);
-            
+
         return redirect('/profile/visitors')->with('success', 'Succesfully Updated');
     }
 
@@ -89,5 +89,23 @@ class ProfileVisitorController extends Controller
     {
         Visitors::destroy($visitor->id);
         return redirect('/profile/visitors')->with('success', 'Succesfully Deleted');
+    }
+    public function input(Request $request)
+    {
+        $id = $request->id;
+        $visitor = Visitors::find($id);
+
+        if ($visitor) {
+            return response()->json([
+                'nama' => $visitor->nama,
+                'nik' => $visitor->nik,
+                'telepon' => $visitor->telepon,
+                'kelahiran' => $visitor->kelahiran,
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Visitor not found',
+            ], 404);
+        }
     }
 }

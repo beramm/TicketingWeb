@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
 @section('container')
+    <style>
+        input[type="number"]::-webkit-inner-spin-button {
+            display: none;
+        }
+    </style>
     <form id="myForm" action="{{ route('postPayment') }}" method="POST">
         <table class="table table-striped">
             <thead class="table-dark">
@@ -37,7 +42,7 @@
                                     value="0" oninput="updateLabel({{ $ticket->id }}, this.value)"
                                     data-index="{{ $index + 1 }}" data-harga="{{ $ticket->harga }}"
                                     data-venue="{{ $ticket->venue }}" name="total-input-venue[{{ $ticket->id }}]"
-                                    max="4">
+                                    max="4" min="0">
                             @endif
                         </td>
                         <td>
@@ -103,11 +108,12 @@
                 staus.textContent = "Can't be higher than 4";
                 outputBeli.value = "";
                 event.preventDefault();
-            } if(sum <= 0){
+            }
+            if (sum <= 0) {
                 staus.textContent = "Need More than 0";
-                outputBeli.value ="";
+                outputBeli.value = "";
                 event.preventDefault()
-            }else {
+            } else {
                 outputHarga.value = sumHarga;
                 outputBeli.value = sum;
                 outputVenue.value = totalVenue;

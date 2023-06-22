@@ -9,6 +9,14 @@
 
         </div>
     <?php endif; ?>
+    <div class="py-3 mt-4 px-3 mb-3 text-center rounded"
+        style="background-color: white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);">
+        <a href="/profile/visitors/create">
+            <button type="button" class="btn btn-dark" style="width: 100%;">
+                Create New Visitor's Data
+            </button>
+        </a>
+    </div>
     <div class="page-content page-container" id="page-content">
         <div class="padding">
             <div class="row container d-flex justify-content-center">

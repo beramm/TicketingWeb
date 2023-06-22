@@ -100,6 +100,9 @@ Route::get('/dashboard/concerts/checkSlug', [DashboardConcertController::class, 
 
 Route::get('/dashboard/categories/checkSlug', [DashboardCategoryController::class, "checkSlug"])->middleware('auth');
 
+Route::get('/profile/visitors/input', [ProfileVisitorController::class, "input"])->middleware('auth');
+
+
 Route::resource('/dashboard/concerts', DashboardConcertController::class)->middleware('auth');
 
 Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth');

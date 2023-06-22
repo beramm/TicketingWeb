@@ -16,7 +16,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('dashboard/tickets*') ? 'active' : '' }}" href="/profile/tickets">
+                <a class="nav-link {{ Request::is('profile/tickets*') ? 'active' : '' }}" href="/profile/tickets">
                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                     Ticket Owned
                 </a>
