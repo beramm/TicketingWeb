@@ -44,8 +44,8 @@
                     </div>
                     <!-- Team Details-->
                     <div class="single_advisor_details_info">
-                        <h6>Nathanael</h6>
-                        <p class="designation">nim</p>
+                        <h6>Nathanael Priambodo </h6>
+                        <p class="designation">215314043</p>
                     </div>
                 </div>
             </div>
@@ -61,8 +61,8 @@
                     </div>
                     <!-- Team Details-->
                     <div class="single_advisor_details_info">
-                        <h6>Noviana </h6>
-                        <p class="designation">nim</p>
+                        <h6>Noviana Tuesdayantika </h6>
+                        <p class="designation">215314048</p>
                     </div>
                 </div>
             </div>
@@ -78,8 +78,8 @@
                     </div>
                     <!-- Team Details-->
                     <div class="single_advisor_details_info">
-                        <h6>Faustina Fasa</h6>
-                        <p class="designation">nim</p>
+                        <h6>Faustina Fasa Bhawika Putri</h6>
+                        <p class="designation">215314044</p>
                     </div>
                 </div>
             </div>
