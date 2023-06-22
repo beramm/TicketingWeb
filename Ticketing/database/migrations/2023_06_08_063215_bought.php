@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id');
             $table->foreignId('tickets_id');
-            $table->foreignId('visitors_id');
+            $table->string('nama');
+            $table->string('nik');
+            $table->string('telepon');
+            $table->string('kelahiran');
             $table->integer('jumlah');
             $table->timestamps();
         });
