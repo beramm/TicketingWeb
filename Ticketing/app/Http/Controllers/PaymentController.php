@@ -26,15 +26,20 @@ class PaymentController extends Controller
      */
     public function create(Request $request)
     {
+        // // dd($request->all);
+
+
         $jumlahBeli = $request->input('jumlahBeli');
         $hargaTotal = $request->input('hargaTotal');
         $totalJumlah = $request->input('totalJumlah');
 
         $totalJumlah = ltrim($totalJumlah, ',');
         $jumlahData = explode(',', $totalJumlah);
+
         $jumlahData = array_filter($jumlahData, function ($value) {
             return $value !== null && $value !== '';
         });
+
 
         $totalId = $request->input('totalId');
         $totalId = ltrim($totalId, ',');
@@ -45,48 +50,58 @@ class PaymentController extends Controller
 
         $tickets = Tickets::findOrFail($idTicket);
 
-        $idVisitor = $request->input('idVisitor');
-        $visitors = Visitors::findOrFail($idVisitor);
+
 
         $user = User::find(auth()->id());
 
         $validatedData = [];
-        
+
         foreach ($idTicket as $index => $ticketId) {
             $data = [
                 'users_id' => $user->id,
                 'tickets_id' => $ticketId,
-                'visitors_id' => $visitors->id,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'telepon' => $request->telepon,
+                'kelahiran' => $request->kelahiran,
                 'jumlah' => $jumlahData[$index],
                 "created_at" =>  \Carbon\Carbon::now(),
                 "updated_at" => \Carbon\Carbon::now(),
             ];
 
+
             $rules = [
                 'tickets_id' => 'required',
-                'visitors_id' => 'required',
                 'jumlah' => 'required',
             ];
 
             $validator = Validator::make($data, $rules);
-            
+
             if ($validator->fails()) {
             } else {
                 $validatedData[] = $data;
             }
         }
+
         $insertedIds = [];
         if (!empty($validatedData)) {
             foreach ($validatedData as $data) {
+
                 $bought = Bought::create($data);
+                //decrement the correspondence ticket's stock
+
+                $ticket = Tickets::find($data['tickets_id']); // Assuming you have a "Ticket" model
+                $ticket->kuantitas -= $data['jumlah'];
+                $ticket->save();
+
                 $insertedIds[] = $bought->id;
             }
-            
+
             session()->flash('success', 'Successfully added');
         }
 
         $bought = Bought::findOrFail($insertedIds);
-        
+
         if (!is_null($request->input('nama'))) {
             $nama = $request->input('nama');
             $nik = $request->input('nik');
@@ -100,25 +115,19 @@ class PaymentController extends Controller
                 'tickets' => $tickets,
                 'jumlahBeli' => $jumlahBeli,
                 'hargaTotal' => $hargaTotal,
-                'visitors' => $visitors,
                 'users' => $user,
                 'bought' => $bought
             ]);
         } else {
-            $nama = $visitors->nama;
-            $nik = $visitors->nik;
-            $telepon = $visitors->telepon;
-            $kelahiran = $visitors->kelahiran;
-            
+
             return redirect()->route('done')->with([
-                'nama' => $nama,
-                'nik' => $nik,
-                'telepon' => $telepon,
-                'kelahiran' => $kelahiran,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'telepon' => $request->telepon,
+                'kelahiran' => $request->kelahiran,
                 'tickets' => $tickets,
                 'jumlahBeli' => $jumlahBeli,
                 'hargaTotal' => $hargaTotal,
-                'visitors' => $visitors,
                 'users' => $user,
                 'bought' => $bought
             ]);

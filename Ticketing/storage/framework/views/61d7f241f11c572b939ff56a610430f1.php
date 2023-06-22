@@ -5,8 +5,14 @@
         <div class="col-lg-8 ">
             <h1>Visitor Credential Form</h1>
             <div class="mt-5">
-                <form action="<?php echo e(route('postPayment/buyed')); ?>" method="POST">
+                <form action="<?php echo e(route('postPayment/buyed')); ?>" method="POST" id="myForm">
                     <?php echo csrf_field(); ?>
+                    <input type="hidden" value="<?php echo e($jumlahBeli); ?>" name="jumlahBeli">
+                    <input type="hidden" value="<?php echo e($hargaTotal); ?>" name="hargaTotal">
+                    <input type="hidden" value="<?php echo e($barangVenue); ?>" name="barangVenue">
+                    <input type="hidden" value="<?php echo e($totalId); ?>" name="totalId">
+                    <input type="hidden" value="<?php echo e($totalJumlah); ?>" name="totalJumlah">
+
                     <label for="visitors">Choose a visitor:</label>
                     <select class="form-select mb-5" name="visitors" id="visitors">
                         <?php $__currentLoopData = $user->visitors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -16,11 +22,6 @@
 
                     <hr>
                     <p>Or Input Manually</p>
-                    <input type="hidden" value="<?php echo e($jumlahBeli); ?>" name="jumlahBeli">
-                    <input type="hidden" value="<?php echo e($hargaTotal); ?>" name="hargaTotal">
-                    <input type="hidden" value="<?php echo e($barangVenue); ?>" name="barangVenue">
-                    <input type="hidden" value="<?php echo e($totalId); ?>" name="totalId">
-                    <input type="hidden" value="<?php echo e($totalJumlah); ?>" name="totalJumlah">
 
 
                     <div class="row mt-3">
@@ -77,13 +78,15 @@ unset($__errorArgs, $__bag); ?>"
                                 id="kelahiran" name="kelahiran" required>
                         </div>
 
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save
-                                Data</button></div>
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-primary profile-button" type="submit">Continue</button>
+                        </div>
                 </form>
             </div>
-
         </div>
     </div>
+
+    
     <script>
         const visitorsDropdown = document.querySelector("#visitors");
         const nama = document.getElementById("nama");

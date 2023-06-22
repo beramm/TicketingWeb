@@ -20,10 +20,7 @@ class Bought extends Model
         return $this->belongsTo(Visitors::class);
     }
 
-    protected $fillable = [
-        'users_id',
-        'tickets_id',
-        'visitors_id',
-        'jumlah'
+    protected $guarded = [
+        'id'
     ];
 }

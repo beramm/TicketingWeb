@@ -2,7 +2,8 @@
     <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link <?php echo e(Request::is('profile/data*') ? 'active' : ''); ?>" aria-current="page" href="/profile/data">
+                <a class="nav-link <?php echo e(Request::is('profile/data*') ? 'active' : ''); ?>" aria-current="page"
+                    href="/profile/data">
                     <span data-feather="user" class="align-text-bottom"></span>
                     Profile
                 </a>
@@ -15,8 +16,9 @@
                 </a>
             </li>
 
+
             <li class="nav-item">
-                <a class="nav-link <?php echo e(Request::is('profile/tickets*') ? 'active' : ''); ?>" href="/profile/tickets">
+                <a class="nav-link <?php echo e(Request::is('profile/tickets*') ? 'active' : ''); ?>" href="/bought">
                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                     Ticket Owned
                 </a>

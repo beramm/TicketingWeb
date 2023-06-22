@@ -17,6 +17,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileTicketController;
 use App\Http\Controllers\ProfileVisitorController;
 
 /*
@@ -35,6 +36,8 @@ use App\Http\Controllers\ProfileVisitorController;
 
 
 
+Route::post('/payment/submit',[PaymentController::class,'create']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::view('/profile', 'profile')->name('profile');
@@ -44,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/postPayment/buyed', [PaymentController::class, 'create'])->name('postPayment/buyed');
     Route::get('/done', [PaymentController::class, 'done'])->name('done');
 });
+
 
 Route::middleware(['guest'])->group(function () {
     Route::view('/login', 'sign.loginup');
@@ -112,6 +116,8 @@ Route::resource('/dashboard/vendors', DashboardVendorController::class)->middlew
 Route::resource('/dashboard/tickets', DashboardTicketController::class)->middleware('auth');
 
 Route::resource('/profile/visitors', ProfileVisitorController::class)->middleware('auth');
+
+Route::resource('/bought', ProfileTicketController::class)->middleware('auth');
 
 Route::get('/profile/data', function () {
     return view('profile.data.index', [

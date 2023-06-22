@@ -79,7 +79,7 @@
                                                 class="bi bi-person-circle"></i> Profile
                                         </a>
                                     </li>
-                                    <li class="text-dark"><a class="dropdown-item" href="/ordered"><i
+                                    <li class="text-dark"><a class="dropdown-item" href="/bought"><i
                                                 class="bi bi-ticket-detailed-fill"></i></i> Ticket Ordered
                                         </a>
                                     </li>

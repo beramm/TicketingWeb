@@ -3,7 +3,7 @@
 @section('container')
     <h1>Invoice</h1>
     <p>Invoice Total : </p>
-    <h3>Rp.{{ $hargaTotal }}</h3>
+    <h3>Rp.  {{ number_format($hargaTotal, 0, ',', '.') }}</h3>
     <table class="table">
         <thead>
             <tr>

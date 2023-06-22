@@ -1,7 +1,7 @@
 <?php $__env->startSection('container'); ?>
     <h1>Invoice</h1>
     <p>Invoice Total : </p>
-    <h3>Rp.<?php echo e($hargaTotal); ?></h3>
+    <h3>Rp.  <?php echo e(number_format($hargaTotal, 0, ',', '.')); ?></h3>
     <table class="table">
         <thead>
             <tr>

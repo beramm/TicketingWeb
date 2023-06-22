@@ -14,7 +14,7 @@ class User extends Authenticatable
     protected $table = 'users';
     public function Bought()
     {
-        return $this->hasMany(Bought::class);
+        return $this->hasMany(Bought::class,'users_id');
     }
 
     public function visitors()

@@ -69,7 +69,7 @@
         </div>
     @else
         <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
-            <h5 class="text-center fs-4">No Post Found.</h5>
+            <h5 class="text-center fs-4">No Concert Found.</h5>
         </div>
     @endif
     <div class="d-flex justify-content-center">
